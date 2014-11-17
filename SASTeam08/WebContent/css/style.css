@@ -55,3 +55,15 @@
 	outline: none; 
 }
 
+.menu_btn {
+	background-image:url("/SASTeam08/images/menu-white.png");
+	height: 27px;
+	border-radius: 5px;
+	border: 0px; 
+	position: absolute;
+	left:0;
+	bottom:0;
+	margin: 4px;
+	margin-left:10px;
+}
+
