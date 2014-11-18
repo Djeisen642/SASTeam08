@@ -4,28 +4,94 @@
 	top:0; 
 	left:0;
 	width:100vw;
-	min-height: 60px;
+	min-height: 40px;
 	z-index:300;
-	box-shadow:0px 2px 10px darkblue; 
+	box-shadow:2px 3px 20px 3px rgba(0,0,0,0.45); 
 }
 
 .navBar {
-	display: table-cell;
-	background-color: #265697;
+	background-color: #8BB553;
 	position: fixed; 
 	top:0; 
 	left:0;
 	width:100vw;
-	height: 95px;
+	height: 80px;
 	z-index:200;
-	vertical-align: bottom; 
+	box-shadow:2px 3px 20px 3px rgba(0,0,0,0.45); 
+}
+
+.navBarText {
+	display:inline-block;
+	color: white;
+	margin-left: 150px;
+	margin-top: 50px;
+	font-family: Arial black;
+	font-size: 16px;
+	cursor:pointer;
+	padding-bottom:4px;
+}
+
+.back_arrow {
+	opacity:0;
+	margin-top:48px;
+	margin-left:15px; 
+	height: 30px;
+	width: 35px;
+	float:left;
+}
+
+.dashboard {
+	position: fixed; 
+	background-color: #313131; 
+	padding: 6px;
+	text-align:center;
+	height:100vh;
+	width:160px;
+	z-index: 400; 
+	left:0;
+	top:0;
+	overflow:auto;
+}
+
+.dashboard_link {
+	display: inline-block;
+	color: white;
+	font-family: Arial;
+	font-size: 16px;
+	padding: 10px;
+	cursor: pointer;
+	height:18px;
+}
+.dashboard_link:hover {
+	font-size:17px;
+}
+.dashboard_link:active{
+	font-size: 15px;	
+}
+
+
+.sas_db_logo {
+	margin-top: 50px;
+	margin-bottom: 10px;
+	width:120px;
+}
+
+.logo {
+	height:	90px;
+	width: 90px;
+	margin-top: 10px;
+}
+
+.hbar {
+	width:110px;
+	margin-top:10px;
 }
 
 .chatBar {
 	position: fixed; 
-	background-color: #505050; 
+	background-color: #313131; 
 	height:100vh;
-	width:300px;
+	width:175px;
 	z-index: 100; 
 	right:0;
 }
@@ -41,15 +107,15 @@
 	margin: 4px;
 	margin-left:10px;
 	color:white;
+	opacity: .75;
 }
 
 .custom_btn:hover {
-	box-shadow: 2px 2px 3px black; 	
 	background-color: #2660ca;
 }
 
 .custom_btn:active {
-	box-shadow: 2px 2px 3px black inset; 	
+	box-shadow: 1px 1px 10px black inset;
 }
 .custom_btn:focus {
 	outline: none; 
@@ -65,5 +131,46 @@
 	bottom:0;
 	margin: 4px;
 	margin-left:10px;
+}
+
+.icon_btn {
+	cursor: pointer;
+	height:30px;
+	width:30px;
+	margin:4px;
+}
+
+.icon_btn:hover {
+	height: 32px;
+	width: 32px;
+}
+
+.icon_btn:active {
+	height:28px;
+	width:28px;
+}
+
+#btn1 {
+	position: fixed;
+	right: 4px;
+	top: 2px;
+}
+
+#btn2 {
+	position: fixed;
+	right: 34px;
+	top: 2px;
+}
+
+#btn3 {
+	position: fixed;
+	right: 68px;
+	top: 2px;
+}
+
+#btn4 {
+	position: fixed;
+	right: 102px;
+	top: 2px;
 }
 
