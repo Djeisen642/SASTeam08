@@ -10,10 +10,14 @@
 </head>
 <body>
 <div class="header">
-<!-- <button class="menu_btn"></button> -->
+<button class="header_btn" id="group"></button>
+<button class="header_btn" id="user"></button>
+<button class="header_btn" id="help"></button>
+<button class="header_btn" id="alert"></button>
+<button class="header_btn" id="search"></button>
 </div>
 <div class="navBar">
-<button class="custom_btn"> Add Campaign +</button>
+<!-- <button class="custom_btn"> Add Campaign +</button> -->
 </div>
 <div class="chatBar" id="chatBar"></div>
 </body>
