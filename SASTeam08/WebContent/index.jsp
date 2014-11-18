@@ -11,11 +11,11 @@
 <body>
 <div class="header">
 	<!-- <button class="menu_btn"></button> -->
-	<img src="images/logo.png" style="float:left;height:30px;width:30px;margin-left:20px;margin-top:4px">
-	<img class="icon_btn" id="btn1" src="images/Icon-02.png"/>
-	<img class="icon_btn" id="btn2" src="images/Icon-09.png"/>
-	<img class="icon_btn" id="btn3" src="images/Icon-10.png"/>
-	<img class="icon_btn" id="btn4" src="images/Icon-05.png"/>
+	<button class="header_btn" id="group"></button>
+	<button class="header_btn" id="user"></button>
+	<button class="header_btn" id="help"></button>
+	<button class="header_btn" id="alert"></button>
+	<button class="header_btn" id="search"></button>
 </div>
 <div class="navBar" id="campaign1">
 	<img class="back_arrow"  src="images/back_arrow.png"/>
