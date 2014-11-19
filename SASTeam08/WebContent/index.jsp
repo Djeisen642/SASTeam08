@@ -32,7 +32,7 @@
 	<div class="dashboard_link">Analytics</div>
 	<div class="dashboard_link">Media <br/> Manager</div>
 	<br/>
-	<div class="dashboard_link">Calendar</div><br/>
+	<div class="dashboard_link">Calendar</div>
 	<div class="dashboard_link">Email</div>
 	<img class="sas_db_logo" src="images/sas_db_logo.png">
 </div>
