@@ -1,8 +1,10 @@
+body {
+	margin: 0;
+}
+
 .header {
 	background-color: #1e76b5;
-	position: fixed; 
-	top:0; 
-	left:0;
+	position: fixed;
 	width:100vw;
 	min-height: 45px;
 	z-index:300;
@@ -13,9 +15,7 @@
 	background-color: #8BB553;
 	display: table-cell;
 	background-color: #8cb755;
-	position: fixed; 
-	top:0; 
-	left:0;
+	position: fixed;
 	width:100vw;
 	height: 90px;
 	z-index:200;
@@ -73,10 +73,43 @@
 .sas_db_logo {
 	margin-top: 50px;
 	margin-bottom: 10px;
-	width:140px;
+	width: 140px;
 	position: absolute;
 	bottom: 15px;
 	left: 17px;
+}
+
+.accordion {
+	display: block;
+	background-color: white;
+	bottom: 0px;
+	position: absolute;
+	width: 100%;
+	z-index: 101;
+}
+
+.accordion-header {
+	margin-left: 200px;
+	padding-top: 10px;
+	color: white;
+	font-family: Arial, Gadget, sans-serif;
+	font-size: 23px;
+	margin-top: 1px;
+}
+
+.accordion-toggle {
+	margin: 0;
+	background-color: #0D7D7B;
+	cursor: pointer;
+	height: 45px;
+}
+
+.accordion-content {
+	display: none;
+}
+
+.accordion-content.default {
+	display: block;
 }
 
 .logo {

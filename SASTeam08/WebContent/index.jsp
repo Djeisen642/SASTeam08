@@ -4,7 +4,12 @@
 <html>
 <head>
 <link type="text/css" rel="stylesheet" href="css/style.css" />
+<link type="text/css" rel="stylesheet" href="css/jquery.jscrollpane.css"/>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="./script/jquery.jscrollpane.min.js"></script>
+<script type="text/javascript" src="./script/jquery.mousewheel.js"></script>
+<script type="text/javascript" src="./script/mwheelIntent.js"></script>
+<script type="text/javascript" src="./script/jquery.jscrollpane.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>SAS Campaign Manager</title>
 </head>
@@ -36,6 +41,48 @@
 	<div class="dashboard_link">Email</div>
 	<img class="sas_db_logo" src="images/sas_db_logo.png">
 </div>
+<div class="accordion" id="dock">
+  <div class="accordion-toggle">
+  <div class="accordion-header">Creative Thanksgiving</div>
+  </div>
+  <div class="accordion-content">
+    <p>Lorem ipsum dolor sit amet mauris eu turpis.</p>
+    <p>Lorem ipsum dolor sit amet mauris eu turpis.</p>
+    <p>Lorem ipsum dolor sit amet mauris eu turpis.</p>
+    <p>Lorem ipsum dolor sit amet mauris eu turpis.</p>
+    <p>Lorem ipsum dolor sit amet mauris eu turpis.</p>
+    <p>Lorem ipsum dolor sit amet mauris eu turpis.</p>
+    <p>Lorem ipsum dolor sit amet mauris eu turpis.</p>
+  </div>
+  <div class="accordion-toggle">
+  <div class="accordion-header">Fall, All Things Pumpkin</div>
+  </div>
+  <div class="accordion-content">
+    <p>Lorem ipsum dolor sit amet mauris eu turpis.</p>
+    <p>Lorem ipsum dolor sit amet mauris eu turpis.</p>
+    <p>Lorem ipsum dolor sit amet mauris eu turpis.</p>
+    <p>Lorem ipsum dolor sit amet mauris eu turpis.</p>
+    <p>Lorem ipsum dolor sit amet mauris eu turpis.</p>
+    <p>Lorem ipsum dolor sit amet mauris eu turpis.</p>
+    <p>Lorem ipsum dolor sit amet mauris eu turpis.</p>
+  </div>
+  <div class="accordion-toggle">
+  <div class="accordion-header">End of Summer BBQ</div>
+  </div>
+  <div class="accordion-content">
+    <p>Vivamus facilisisnibh scelerisque laoreet.</p>
+    <p>Vivamus facilisisnibh scelerisque laoreet.</p>
+    <p>Vivamus facilisisnibh scelerisque laoreet.</p>
+    <p>Vivamus facilisisnibh scelerisque laoreet.</p>
+    <p>Vivamus facilisisnibh scelerisque laoreet.</p>
+    <p>Vivamus facilisisnibh scelerisque laoreet.</p>
+    <p>Vivamus facilisisnibh scelerisque laoreet.</p>
+    <p>Vivamus facilisisnibh scelerisque laoreet.</p>
+    <p>Vivamus facilisisnibh scelerisque laoreet.</p>
+    <p>Vivamus facilisisnibh scelerisque laoreet.</p>
+  </div>
+</div>
+
 <div class="chatBar" id="chatBar"></div>
 </body>
 <script>
@@ -56,5 +103,21 @@
 		}
 		
 	});
+	
+	$(document).ready(function($) {
+		$('#dock').find('.accordion-toggle').click(function(){
+			
+			    //Expand or collapse this panel
+			$(this).next().slideToggle('fast');
+			
+			    //Hide the other panels
+			$('.accordion-content').not($(this).next()).slideUp('fast');
+		});
+	});
+	
+	// Use the function below to add a scroll bar to a div
+// 	$(function() {
+// 		$('.dashboard').jScrollPane();
+// 	});
 </script>
 </html>
