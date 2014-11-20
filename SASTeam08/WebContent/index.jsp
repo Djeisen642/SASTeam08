@@ -117,12 +117,16 @@
 				$('.dashboard').animate({left:-175}, 300);
 				$(this).find('.accordion-header').animate({marginLeft:"15px"}, 300);
 				$(this).find('.accordion-header > .back_arrow').animate({opacity:1}, 1000);
+				$(".accordion-toggle").not($(this)).animate({opacity:0});
+				$(this).css({borderBottom:"0px"});
 				showingDashboard = false; 
 			//clicking again should hide the dashboard
 			} else {
 				$('.dashboard').animate({left:0}, 300);
 				$(this).find('.accordion-header').animate({marginLeft:"200px"}, 300);
 				$(this).find('.accordion-header > .back_arrow').animate({opacity:0}, 300);
+				$(".accordion-toggle").not($(this)).animate({opacity:1});
+				$(this).css({borderBottom:"1px solid white"});
 				showingDashboard = true;
 			}
 		}
@@ -133,6 +137,7 @@
 	$(document).ready(function($) {
 		$(".accordion-toggle:first").css({backgroundColor:"#8cb755"});
 		$(".accordion-toggle:first").addClass("navBar");
+		
 		/*$('#dock').find('.accordion-toggle').click(function(){
 			
 			    //Expand or collapse this panel
