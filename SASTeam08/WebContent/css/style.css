@@ -12,10 +12,7 @@ body {
 }
 
 .navBar {
-	background-color: #8BB553;
-	display: table-cell;
 	background-color: #8cb755;
-	position: fixed;
 	width:100vw;
 	height: 90px;
 	z-index:200;
@@ -35,7 +32,6 @@ body {
 
 .back_arrow {
 	opacity:0;
-	margin-top:54px;
 	margin-left:15px; 
 	height: 30px;
 	width: 35px;
@@ -81,8 +77,8 @@ body {
 
 .accordion {
 	display: block;
-	background-color: white;
-	bottom: 0px;
+	background-color: rgba(256,256,256,0);
+	top: 45px;
 	position: absolute;
 	width: 100%;
 	z-index: 101;
@@ -94,7 +90,6 @@ body {
 	color: white;
 	font-family: Arial, Gadget, sans-serif;
 	font-size: 23px;
-	margin-top: 1px;
 }
 
 .accordion-toggle {
@@ -102,6 +97,8 @@ body {
 	background-color: #0D7D7B;
 	cursor: pointer;
 	height: 45px;
+	border: 1px solid white; 
+	padding:0;
 }
 
 .accordion-content {
@@ -229,29 +226,5 @@ body {
 .icon_btn:active {
 	height:28px;
 	width:28px;
-}
-
-#btn1 {
-	position: fixed;
-	right: 4px;
-	top: 2px;
-}
-
-#btn2 {
-	position: fixed;
-	right: 34px;
-	top: 2px;
-}
-
-#btn3 {
-	position: fixed;
-	right: 68px;
-	top: 2px;
-}
-
-#btn4 {
-	position: fixed;
-	right: 102px;
-	top: 2px;
 }
 

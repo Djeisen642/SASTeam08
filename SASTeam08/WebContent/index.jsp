@@ -6,6 +6,7 @@
 <link type="text/css" rel="stylesheet" href="css/style.css" />
 <link type="text/css" rel="stylesheet" href="css/jquery.jscrollpane.css"/>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="javascripts/jquery-color.js"></script>
 <script type="text/javascript" src="./script/jquery.jscrollpane.min.js"></script>
 <script type="text/javascript" src="./script/jquery.mousewheel.js"></script>
 <script type="text/javascript" src="./script/mwheelIntent.js"></script>
@@ -22,10 +23,10 @@
 	<button class="header_btn" id="alert"></button>
 	<button class="header_btn" id="search"></button>
 </div>
-<div class="navBar" id="campaign1">
+<!--<div class="navBar" id="campaign1">
 	<img class="back_arrow"  src="images/back_arrow.png"/>
 	<div class="navBarText">2014 Christmas - Canned Food Drive</div>
-</div>
+</div>-->
 
 <!-- side bar on the left side of screen -->
 <div class="dashboard" id="dashboard">
@@ -43,7 +44,19 @@
 </div>
 <div class="accordion" id="dock">
   <div class="accordion-toggle">
-  <div class="accordion-header">Creative Thanksgiving</div>
+  <div class="accordion-header">
+ 	 <img class="back_arrow"  src="images/back_arrow.png"/>
+  	 2014 Christmas - Canned Food Drive
+  </div>
+  <div class="accordion-content">
+    <p>Hello</p>
+  </div>
+  </div>
+  <div class="accordion-toggle">
+  <div class="accordion-header">
+  	<img class="back_arrow"  src="images/back_arrow.png"/>
+  	Creative Thanksgiving
+  </div>
   </div>
   <div class="accordion-content">
     <p>Lorem ipsum dolor sit amet mauris eu turpis.</p>
@@ -55,7 +68,9 @@
     <p>Lorem ipsum dolor sit amet mauris eu turpis.</p>
   </div>
   <div class="accordion-toggle">
-  <div class="accordion-header">Fall, All Things Pumpkin</div>
+  <div class="accordion-header">
+  	<img class="back_arrow"  src="images/back_arrow.png"/>
+  	Fall, All Things Pumpkin</div>
   </div>
   <div class="accordion-content">
     <p>Lorem ipsum dolor sit amet mauris eu turpis.</p>
@@ -67,7 +82,9 @@
     <p>Lorem ipsum dolor sit amet mauris eu turpis.</p>
   </div>
   <div class="accordion-toggle">
-  <div class="accordion-header">End of Summer BBQ</div>
+  <div class="accordion-header">
+	  <img class="back_arrow"  src="images/back_arrow.png"/>
+	  End of Summer BBQ</div>
   </div>
   <div class="accordion-content">
     <p>Vivamus facilisisnibh scelerisque laoreet.</p>
@@ -86,33 +103,44 @@
 <div class="chatBar" id="chatBar"></div>
 </body>
 <script>
-	var showing = true; 
-	$('.navBarText').on('click', function () {
-		//clicking on a campaign header should hide the dashboard
-		if (showing === true) {
-			$('.dashboard').animate({left:-175}, 300);
-			$('.navBarText').animate({marginLeft:"15px"}, 300);
-			$('.back_arrow').animate({opacity:1}, 1000);
-			showing = false; 
-		//clicking again should hide the dashboard
+	var showingDashboard = true; 
+	$('.accordion-toggle').click(function () {
+		if (!$(this).hasClass("navBar")) {
+			$(this).addClass("navBar", true);
+			$(this).animate({backgroundColor:"#8cb755"}, 300);
+			$('.accordion-toggle').not($(this)).animate({backgroundColor:"#0D7D7B"});
+			$('.accordion-toggle').not($(this)).removeClass("navBar");
+			$('.navBar').prependTo('#dock');
 		} else {
-			$('.dashboard').animate({left:0}, 300);
-			$('.navBarText').animate({marginLeft:"150px"}, 300);
-			$('.back_arrow').animate({opacity:0}, 300);
-			showing = true;
+			//clicking on a campaign header should hide the dashboard
+			if (showingDashboard === true) {
+				$('.dashboard').animate({left:-175}, 300);
+				$(this).find('.accordion-header').animate({marginLeft:"15px"}, 300);
+				$(this).find('.accordion-header > .back_arrow').animate({opacity:1}, 1000);
+				showingDashboard = false; 
+			//clicking again should hide the dashboard
+			} else {
+				$('.dashboard').animate({left:0}, 300);
+				$(this).find('.accordion-header').animate({marginLeft:"200px"}, 300);
+				$(this).find('.accordion-header > .back_arrow').animate({opacity:0}, 300);
+				showingDashboard = true;
+			}
 		}
-		
 	});
 	
+	
+	
 	$(document).ready(function($) {
-		$('#dock').find('.accordion-toggle').click(function(){
+		$(".accordion-toggle:first").css({backgroundColor:"#8cb755"});
+		$(".accordion-toggle:first").addClass("navBar");
+		/*$('#dock').find('.accordion-toggle').click(function(){
 			
 			    //Expand or collapse this panel
 			$(this).next().slideToggle('fast');
 			
 			    //Hide the other panels
 			$('.accordion-content').not($(this).next()).slideUp('fast');
-		});
+		});*/
 	});
 	
 	// Use the function below to add a scroll bar to a div
