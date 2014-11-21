@@ -42,61 +42,31 @@
 	<div class="dashboard_link">Email</div>
 	<img class="sas_db_logo" src="images/sas_db_logo.png">
 </div>
-<div class="accordion" id="dock">
+<div class="activeItem" id="activeItem">
   <div class="accordion-toggle">
-  <div class="accordion-header">
- 	 <img class="back_arrow"  src="images/back_arrow.png"/>
-  	 2014 Christmas - Canned Food Drive
+    <div class="accordion-header">
+   	  <img class="back_arrow"  src="images/back_arrow.png"/>
+  	  2014 Christmas - Canned Food Drive
+    </div>
   </div>
-  <div class="accordion-content">
-    <p>Hello</p>
-  </div>
-  </div>
+</div>
+
+<div class="accordion" id="dock">
   <div class="accordion-toggle">
   <div class="accordion-header">
   	<img class="back_arrow"  src="images/back_arrow.png"/>
   	Creative Thanksgiving
   </div>
   </div>
-  <div class="accordion-content">
-    <p>Lorem ipsum dolor sit amet mauris eu turpis.</p>
-    <p>Lorem ipsum dolor sit amet mauris eu turpis.</p>
-    <p>Lorem ipsum dolor sit amet mauris eu turpis.</p>
-    <p>Lorem ipsum dolor sit amet mauris eu turpis.</p>
-    <p>Lorem ipsum dolor sit amet mauris eu turpis.</p>
-    <p>Lorem ipsum dolor sit amet mauris eu turpis.</p>
-    <p>Lorem ipsum dolor sit amet mauris eu turpis.</p>
-  </div>
   <div class="accordion-toggle">
   <div class="accordion-header">
   	<img class="back_arrow"  src="images/back_arrow.png"/>
   	Fall, All Things Pumpkin</div>
   </div>
-  <div class="accordion-content">
-    <p>Lorem ipsum dolor sit amet mauris eu turpis.</p>
-    <p>Lorem ipsum dolor sit amet mauris eu turpis.</p>
-    <p>Lorem ipsum dolor sit amet mauris eu turpis.</p>
-    <p>Lorem ipsum dolor sit amet mauris eu turpis.</p>
-    <p>Lorem ipsum dolor sit amet mauris eu turpis.</p>
-    <p>Lorem ipsum dolor sit amet mauris eu turpis.</p>
-    <p>Lorem ipsum dolor sit amet mauris eu turpis.</p>
-  </div>
   <div class="accordion-toggle">
   <div class="accordion-header">
 	  <img class="back_arrow"  src="images/back_arrow.png"/>
 	  End of Summer BBQ</div>
-  </div>
-  <div class="accordion-content">
-    <p>Vivamus facilisisnibh scelerisque laoreet.</p>
-    <p>Vivamus facilisisnibh scelerisque laoreet.</p>
-    <p>Vivamus facilisisnibh scelerisque laoreet.</p>
-    <p>Vivamus facilisisnibh scelerisque laoreet.</p>
-    <p>Vivamus facilisisnibh scelerisque laoreet.</p>
-    <p>Vivamus facilisisnibh scelerisque laoreet.</p>
-    <p>Vivamus facilisisnibh scelerisque laoreet.</p>
-    <p>Vivamus facilisisnibh scelerisque laoreet.</p>
-    <p>Vivamus facilisisnibh scelerisque laoreet.</p>
-    <p>Vivamus facilisisnibh scelerisque laoreet.</p>
   </div>
 </div>
 
@@ -105,28 +75,37 @@
 <script>
 	var showingDashboard = true; 
 	$('.accordion-toggle').click(function () {
-		if (!$(this).hasClass("navBar")) {
-			$(this).addClass("navBar", true);
-			$(this).animate({backgroundColor:"#8cb755"}, 300);
-			$('.accordion-toggle').not($(this)).animate({backgroundColor:"#0D7D7B"});
-			$('.accordion-toggle').not($(this)).removeClass("navBar");
-			$('.navBar').prependTo('#dock');
-		} else {
+		if (!$(this).hasClass("navBar")) { //when an item is clicked and is not top item
+			var goingActive = $(this);
+			var lastActive = $('#activeItem > .accordion-toggle');
+			goingActive.animate({marginLeft:"200%"}, 300);
+			$('#activeItem').animate({top:"-20px"}, 300, function () {
+				$('.accordion-toggle').not(goingActive).css({backgroundColor:"#0D7D7B"}); //change all other bgs to dark green
+				$(goingActive).addClass("navBar", true);
+				$('#activeItem').css({top:"45px"});
+				lastActive.css({borderBottom:"1px solid white", marginLeft: "200%"});
+				lastActive.appendTo("#dock"); // prepend activeItem to dock
+				lastActive.animate({marginLeft:"0"}, 300);
+				goingActive.prependTo('#activeItem');
+				goingActive.animate({marginLeft:"0"}, 300);
+				$('.accordion-toggle').not(goingActive).removeClass("navBar"); // remove navBar class from all other items
+				$(goingActive).animate({backgroundColor:"#8cb755"}, 300); //change bg to light green
+				$(goingActive).css({borderBottom:"0px"});
+			});
+		} else { //when an item is clicked and is top item
 			//clicking on a campaign header should hide the dashboard
 			if (showingDashboard === true) {
-				$('.dashboard').animate({left:-175}, 300);
-				$(this).find('.accordion-header').animate({marginLeft:"15px"}, 300);
-				$(this).find('.accordion-header > .back_arrow').animate({opacity:1}, 1000);
-				$(".accordion-toggle").not($(this)).animate({opacity:0});
-				$(this).css({borderBottom:"0px"});
+				$('.dashboard').animate({left:-175}, 300); //hide the dashboard
+				$(this).find('.accordion-header').animate({marginLeft:"15px"}, 300); //move text left
+				$(this).find('.accordion-header > .back_arrow').animate({opacity:1}, 1000); // show back arrow
+				$(".accordion-toggle").not($(this)).animate({opacity:0}); //hide all other accordion-toggle classes
 				showingDashboard = false; 
-			//clicking again should hide the dashboard
+			//clicking again should show the dashboard
 			} else {
 				$('.dashboard').animate({left:0}, 300);
 				$(this).find('.accordion-header').animate({marginLeft:"200px"}, 300);
 				$(this).find('.accordion-header > .back_arrow').animate({opacity:0}, 300);
 				$(".accordion-toggle").not($(this)).animate({opacity:1});
-				$(this).css({borderBottom:"1px solid white"});
 				showingDashboard = true;
 			}
 		}
@@ -135,8 +114,8 @@
 	
 	
 	$(document).ready(function($) {
-		$(".accordion-toggle:first").css({backgroundColor:"#8cb755"});
-		$(".accordion-toggle:first").addClass("navBar");
+		$(".activeItem > .accordion-toggle").css({backgroundColor:"#8cb755", borderBottom:0});
+		$(".activeItem > .accordion-toggle").addClass("navBar");
 		
 		/*$('#dock').find('.accordion-toggle').click(function(){
 			
