@@ -5,7 +5,7 @@
 <head>
 <link type="text/css" rel="stylesheet" href="css/style.css" />
 <link type="text/css" rel="stylesheet" href="css/jquery.jscrollpane.css"/>
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="javascripts/jquery.js"></script>
 <script src="javascripts/jquery-color.js"></script>
 <script type="text/javascript" src="./script/jquery.jscrollpane.min.js"></script>
 <script type="text/javascript" src="./script/jquery.mousewheel.js"></script>
@@ -70,6 +70,40 @@
   </div>
 </div>
 
+<div class="documentDisplay">
+	<div class="documentDisplayTable"> 
+		<div class="documentRow">
+			<div class="documentBox"></div>
+			<div class="documentBox"></div>
+			<div class="documentBox"></div>
+		</div>
+	</div>
+	<div class="documentDisplayTable"> 
+		<div class="documentRow">
+			<div class="documentBox"></div>
+			<div class="documentBox"></div>
+			<div class="documentBox"></div>
+		</div>
+	</div>
+	<div class="documentDisplayTable"> 
+		<div class="documentRow">
+			<div class="documentBox"></div>
+			<div class="documentBox"></div>
+			<div class="documentBox"></div>
+		</div>
+	</div>
+</div>
+
+<div class="chat">
+	<div class="chatsReceived" id="chatsReceived">
+		<div class="chatItem">
+			<img class="chatBubbleAvatar" src="images/chatAvatar.png">
+			<div class="chatBubble">This is a chat bubble</div>
+		</div>
+	</div>
+	<textarea class="chatInput"></textarea>
+</div>
+
 <div class="chatBar" id="chatBar"></div>
 </body>
 <script>
@@ -99,6 +133,10 @@
 				$(this).find('.accordion-header').animate({marginLeft:"15px"}, 300); //move text left
 				$(this).find('.accordion-header > .back_arrow').animate({opacity:1}, 1000); // show back arrow
 				$(".accordion-toggle").not($(this)).animate({opacity:0}); //hide all other accordion-toggle classes
+				$(".documentDisplay").animate({left:"40px", bottom:"5px", top:"200px"}, 300);
+				$(".chatsReceived").empty();
+				$(".chat").animate({right: "20px"});
+				
 				showingDashboard = false; 
 			//clicking again should show the dashboard
 			} else {
@@ -106,11 +144,26 @@
 				$(this).find('.accordion-header').animate({marginLeft:"200px"}, 300);
 				$(this).find('.accordion-header > .back_arrow').animate({opacity:0}, 300);
 				$(".accordion-toggle").not($(this)).animate({opacity:1});
+				$(".documentDisplay").animate({left:"180px", bottom:"138px", top:"90px"}, 300);
+				$(".chat").animate({right: "-200px"});
 				showingDashboard = true;
 			}
 		}
 	});
 	
+	
+	// handle chat functionality
+	$(".chatInput").on("keyup", function (e) {
+		var code = (e.keycode) ? e.keycode : e.which; 
+		if (code === 13) {
+			var chatItem = "<div class=\"chatItem\">";
+			var img = "<img class=\"chatBubbleAvatar\" src=\"images/chatAvatar.png\"/>";
+			var submit = "<div class=\"chatBubble\">" + $('.chatInput').val() + "</div></div>";
+			$(chatItem + img + submit).appendTo($('.chatsReceived'));
+			updateChatScroller();
+			$('.chatInput').val("");
+		}
+	});
 	
 	
 	$(document).ready(function($) {
@@ -126,6 +179,12 @@
 			$('.accordion-content').not($(this).next()).slideUp('fast');
 		});*/
 	});
+	
+	function updateChatScroller () {
+		var element = document.getElementById("chatsReceived");
+		element.scrollTop = element.scrollHeight;
+	}
+	
 	
 	// Use the function below to add a scroll bar to a div
 // 	$(function() {

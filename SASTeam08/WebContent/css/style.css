@@ -5,6 +5,7 @@ body {
 .header {
 	background-color: #1e76b5;
 	position: fixed;
+	top:0;
 	width:100vw;
 	min-height: 45px;
 	z-index:300;
@@ -127,6 +128,7 @@ body {
 .chatBar {
 	position: fixed; 
 	background-color: #313131; 
+	top:0;
 	height:100vh;
 	width:175px;
 	z-index: 100; 
@@ -237,3 +239,103 @@ body {
 	z-index:101;
 }
 
+.documentDisplay {
+	position:fixed;
+	top: 90px;
+	right:180px;
+	left:180px;
+	bottom:138px;
+	z-index: 10; 
+	overflow:auto;
+}
+
+.documentDisplayTable {
+	display: table;
+	border-spacing: 10px;
+	border-collapse; separate;
+}
+
+.documentRow {
+	display: table-row;
+	margin:10px;
+}
+
+.documentBox {
+	display: table-cell;
+	margin: 20px;
+	width: 200px;
+	height: 200px; 
+	background-color: #313131; 
+	border-radius: 4px; 
+}
+
+.chat {
+	position:fixed;
+	right:-200px;
+	top: 120px;
+	bottom: 20px;
+	width: 175px; 
+	background-color: #CACACA;
+	z-index:200;
+	border-radius: 5px;
+	overflow:hidden;
+}
+
+.chatInput {
+	position: absolute;
+	bottom:0;
+	left: 0;
+	right:0;
+	margin:6px;
+	height: 60px;
+	background-color: #AAAAAA; 
+	color: white;
+	border: 0px;
+	box-shadow: 2px 2px 40px 4px rgba(0,0,0,.4) inset,
+				-2px -2px 40px 4px rgba(0,0,0,.4) inset;
+	border-radius:5px;
+	padding: 3px;
+	overflow: hidden;
+}
+
+.chatsReceived {
+	position: absolute;
+	top: 0px;
+	bottom: 65px;
+	right: -15px;
+	margin: 6px;
+	overflow-y:auto;
+	word-wrap: break-word;
+}
+
+.chatItem {
+}
+
+.chatBubble {
+	color: white;
+	background-color: #1e76b5;
+	border-radius: 5px;
+	padding: 6px;
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-right: 15px;
+	font-family: "Arial", Serif;
+	box-shadow: 0px 2px 10px white inset;
+	margin-bottom: 5px;
+	margin-right: 15px;
+	display:inline-block;
+	width: 100px;
+}
+
+.chatBubbleAvatar {
+	vertical-align: bottom;
+	height: 40px;
+	width: 30px;
+	display:inline-block;
+	margin-bottom: 4px;
+}
+
+
+.chatInput:focus {
+	outline:none;
+}
