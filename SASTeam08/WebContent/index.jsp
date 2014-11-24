@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="action.mainAction"%>
+<%@page import="bean.DocBean"%>
+<%@page import="java.util.List" %>    
+<%
+	mainAction action = new mainAction();
+	List<DocBean> docs = action.getDocs(1);
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -104,6 +111,10 @@
 	<textarea class="chatInput"></textarea>
 </div>
 
+<div style="z-index:1000;color:white;position:absolute;top:300px;">
+<% String text = docs.get(0).getText(); %>
+</div>
+
 <div class="chatBar" id="chatBar"></div>
 </body>
 <script>
@@ -133,7 +144,7 @@
 				$(this).find('.accordion-header').animate({marginLeft:"15px"}, 300); //move text left
 				$(this).find('.accordion-header > .back_arrow').animate({opacity:1}, 1000); // show back arrow
 				$(".accordion-toggle").not($(this)).animate({opacity:0}); //hide all other accordion-toggle classes
-				$(".documentDisplay").animate({left:"40px", bottom:"5px", top:"200px"}, 300);
+				$(".documentDisplay").animate({left:"40px", bottom:"5px", right:"200px"}, 300);
 				$(".chatsReceived").empty();
 				$(".chat").animate({right: "20px"});
 				
@@ -144,7 +155,7 @@
 				$(this).find('.accordion-header').animate({marginLeft:"200px"}, 300);
 				$(this).find('.accordion-header > .back_arrow').animate({opacity:0}, 300);
 				$(".accordion-toggle").not($(this)).animate({opacity:1});
-				$(".documentDisplay").animate({left:"180px", bottom:"138px", top:"90px"}, 300);
+				$(".documentDisplay").animate({left:"180px", bottom:"138px", right:"180px"}, 300);
 				$(".chat").animate({right: "-200px"});
 				showingDashboard = true;
 			}

@@ -1,0 +1,8 @@
+CREATE TABLE docs (
+	href VARCHAR(500),
+	text VARCHAR(500),
+	id SERIAL,
+	campaignId BIGINT UNSIGNED,
+	PRIMARY KEY (id)
+	
+) ENGINE=innoDB;
