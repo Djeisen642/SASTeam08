@@ -367,9 +367,11 @@ body {
 
 .imageModalImageHelper {
 	display: inline-block;
-    height: 50%;
+	height: 50%;
 }
 
 #imageModalImage {
 	vertical-align: middle; 
+	max-width: 90%;
+	height: auto;
 }
