@@ -24,6 +24,9 @@ public class DocsBeanLoader implements BeanLoader<DocBean> {
 		DocBean bean = new DocBean();
 		bean.setHref(rs.getString("href"));
 		bean.setText(rs.getString("text"));
+		bean.setCampaignId(rs.getInt("campaignId"));
+		bean.setId(rs.getInt("id"));
+		bean.setCreator(rs.getString("creator"));
 		return bean;
 	}
 
@@ -33,6 +36,7 @@ public class DocsBeanLoader implements BeanLoader<DocBean> {
 		ps.setString(1, bean.getHref());
 		ps.setString(2, bean.getText());
 		ps.setInt(3, bean.getCampaignId());
+		ps.setString(4, bean.getCreator());
 		return ps;
 	}
 

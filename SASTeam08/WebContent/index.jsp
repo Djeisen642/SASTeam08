@@ -2,10 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@page import="action.mainAction"%>
 <%@page import="bean.DocBean"%>
+<%@page import="bean.CampaignBean" %>
 <%@page import="java.util.List" %>    
 <%
 	mainAction action = new mainAction();
-	List<DocBean> docs = action.getDocs(1);
+	List<CampaignBean> campaignList = action.getCampaigns();
+	List<DocBean> docList = action.getDocs(campaignList.get(0).getId()); 
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -50,54 +52,33 @@
 	<img class="sas_db_logo" src="images/sas_db_logo.png">
 </div>
 <div class="activeItem" id="activeItem">
-  <div class="accordion-toggle">
+  <div class="accordion-toggle" id="<%= campaignList.get(0).getId() %>">
     <div class="accordion-header">
    	  <img class="back_arrow"  src="images/back_arrow.png"/>
-  	  2014 Christmas - Canned Food Drive
+   	  <% 
+   	  String title = "";
+   	  if (campaignList != null) {
+   	  	title = campaignList.get(0).getTitle();
+   	  }%>
+  	  <div><%= title %></div>
     </div>
   </div>
 </div>
 
 <div class="accordion" id="dock">
-  <div class="accordion-toggle">
-  <div class="accordion-header">
-  	<img class="back_arrow"  src="images/back_arrow.png"/>
-  	Creative Thanksgiving
+  <%for (int i = 1; i < campaignList.size(); i++) { %>
+  <div class="accordion-toggle" id="getDocs(<%= campaignList.get(i).getId() %>)">
+	  <div class="accordion-header">
+	  	<img class="back_arrow"  src="images/back_arrow.png"/>
+	  	<div><%= campaignList.get(i).getTitle() %></div>
+	  </div>
   </div>
-  </div>
-  <div class="accordion-toggle">
-  <div class="accordion-header">
-  	<img class="back_arrow"  src="images/back_arrow.png"/>
-  	Fall, All Things Pumpkin</div>
-  </div>
-  <div class="accordion-toggle">
-  <div class="accordion-header">
-	  <img class="back_arrow"  src="images/back_arrow.png"/>
-	  End of Summer BBQ</div>
-  </div>
+  <% } %>
 </div>
 
 <div class="documentDisplay">
-	<div class="documentDisplayTable"> 
-		<div class="documentRow">
-			<div class="documentBox"></div>
-			<div class="documentBox"></div>
-			<div class="documentBox"></div>
-		</div>
-	</div>
-	<div class="documentDisplayTable"> 
-		<div class="documentRow">
-			<div class="documentBox"></div>
-			<div class="documentBox"></div>
-			<div class="documentBox"></div>
-		</div>
-	</div>
-	<div class="documentDisplayTable"> 
-		<div class="documentRow">
-			<div class="documentBox"></div>
-			<div class="documentBox"></div>
-			<div class="documentBox"></div>
-		</div>
+	<div class="documentDisplayTable">
+
 	</div>
 </div>
 
@@ -111,10 +92,6 @@
 	<textarea class="chatInput"></textarea>
 </div>
 
-<div style="z-index:1000;color:white;position:absolute;top:300px;">
-<% String text = docs.get(0).getText(); %>
-</div>
-
 <div class="chatBar" id="chatBar"></div>
 </body>
 <script>
@@ -123,7 +100,9 @@
 		if (!$(this).hasClass("navBar")) { //when an item is clicked and is not top item
 			var goingActive = $(this);
 			var lastActive = $('#activeItem > .accordion-toggle');
+			var id = $(this).attr("id");
 			goingActive.animate({marginLeft:"200%"}, 300);
+			getDocs(id);
 			$('#activeItem').animate({top:"-20px"}, 300, function () {
 				$('.accordion-toggle').not(goingActive).css({backgroundColor:"#0D7D7B"}); //change all other bgs to dark green
 				$(goingActive).addClass("navBar", true);
@@ -180,7 +159,8 @@
 	$(document).ready(function($) {
 		$(".activeItem > .accordion-toggle").css({backgroundColor:"#8cb755", borderBottom:0});
 		$(".activeItem > .accordion-toggle").addClass("navBar");
-		
+		var activeId = $(".activeItem > .accordion-toggle").attr("id");
+		getDocs(activeId);
 		/*$('#dock').find('.accordion-toggle').click(function(){
 			
 			    //Expand or collapse this panel
@@ -194,6 +174,30 @@
 	function updateChatScroller () {
 		var element = document.getElementById("chatsReceived");
 		element.scrollTop = element.scrollHeight;
+	}
+	function getDocs(id) {
+		$('.documentDisplay').fadeOut(function () {
+			$(".documentDisplayTable").empty();
+			$.get("DBGetter?id=" + id, function (data) {
+				for (var i = 0; i < data.length; i++) {
+					var content;
+					console.log($(".documentDisplayTable").children());
+					if ( i % 3 === 0) {
+						content = "<div class=\"documentRow\">" +  
+						"<div class=\"documentBox\">" + "<div class=\"documentImage\"></div>"  +
+						data[i].text + " - " + data[i].creator + "</div></div>";
+						$(content).appendTo($(".documentDisplayTable"));
+					} else {
+						content = "<div class=\"documentBox\">" + "<div class=\"documentImage\"></div>"
+						+ data[i].text + " - " + data[i].creator +"</div></div>";
+						$(content).appendTo($(".documentDisplayTable").children().last());
+					}
+					$(".documentDisplayTable").children().last().children().last().children().first().css('background-image', 'url(' + data[i].href + ')');
+					
+				}
+				$(".documentDisplay").fadeIn();
+			});
+		});
 	}
 	
 	

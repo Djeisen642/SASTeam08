@@ -3,7 +3,33 @@ package bean;
 public class DocBean {
 	private String href; 
 	private String text;
+	private String creator;
+	/**
+	 * @return the creator
+	 */
+	public String getCreator() {
+		return creator;
+	}
+	/**
+	 * @param creator the creator to set
+	 */
+	public void setCreator(String creator) {
+		this.creator = creator;
+	}
 	private int campaignId; 
+	private int id;
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
 	/**
 	 * @return the campaignId
 	 */

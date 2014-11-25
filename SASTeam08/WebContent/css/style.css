@@ -266,7 +266,21 @@ body {
 	width: 200px;
 	height: 200px; 
 	background-color: #313131; 
-	border-radius: 4px; 
+	border-radius: 4px;
+	font-family: "Arial"; 
+	font-size: 10px;  
+	color: white;
+	vertical-align: bottom;
+	text-align: center;
+	padding: 10px;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+.documentImage {
+	background-size: cover;
+	height: 95%;
+	width: 97%;
 }
 
 .chat {
