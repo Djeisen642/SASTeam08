@@ -67,7 +67,7 @@
 
 <div class="accordion" id="dock">
   <%for (int i = 1; i < campaignList.size(); i++) { %>
-  <div class="accordion-toggle" id="getDocs(<%= campaignList.get(i).getId() %>)">
+  <div class="accordion-toggle" id="<%= campaignList.get(i).getId() %>">
 	  <div class="accordion-header">
 	  	<img class="back_arrow"  src="images/back_arrow.png"/>
 	  	<div><%= campaignList.get(i).getTitle() %></div>
@@ -78,7 +78,6 @@
 
 <div class="documentDisplay">
 	<div class="documentDisplayTable">
-
 	</div>
 </div>
 
@@ -90,6 +89,11 @@
 		</div>
 	</div>
 	<textarea class="chatInput"></textarea>
+</div>
+
+<div class="imageModal" onclick="hideImageModal()">
+	<span class="imageModalImageHelper"></span>
+		<img id="imageModalImage" src="" />
 </div>
 
 <div class="chatBar" id="chatBar"></div>
@@ -122,7 +126,10 @@
 				$('.dashboard').animate({left:-175}, 300); //hide the dashboard
 				$(this).find('.accordion-header').animate({marginLeft:"15px"}, 300); //move text left
 				$(this).find('.accordion-header > .back_arrow').animate({opacity:1}, 1000); // show back arrow
-				$(".accordion-toggle").not($(this)).animate({opacity:0}); //hide all other accordion-toggle classes
+				var allOtherAccordionToggles = $(".accordion-toggle").not($(this));
+				allOtherAccordionToggles.animate({opacity:0}, function (){
+					allOtherAccordionToggles.hide();
+				}); //hide all other accordion-toggle classes
 				$(".documentDisplay").animate({left:"40px", bottom:"5px", right:"200px"}, 300);
 				$(".chatsReceived").empty();
 				$(".chat").animate({right: "20px"});
@@ -133,7 +140,8 @@
 				$('.dashboard').animate({left:0}, 300);
 				$(this).find('.accordion-header').animate({marginLeft:"200px"}, 300);
 				$(this).find('.accordion-header > .back_arrow').animate({opacity:0}, 300);
-				$(".accordion-toggle").not($(this)).animate({opacity:1});
+				$(".accordion-toggle").not($(this)).show();
+				$(".accordion-toggle").not($(this)).animate({opacity:1}, 300);
 				$(".documentDisplay").animate({left:"180px", bottom:"138px", right:"180px"}, 300);
 				$(".chat").animate({right: "-200px"});
 				showingDashboard = true;
@@ -181,14 +189,15 @@
 			$.get("DBGetter?id=" + id, function (data) {
 				for (var i = 0; i < data.length; i++) {
 					var content;
-					console.log($(".documentDisplayTable").children());
 					if ( i % 3 === 0) {
 						content = "<div class=\"documentRow\">" +  
-						"<div class=\"documentBox\">" + "<div class=\"documentImage\"></div>"  +
+						"<div class=\"documentBox\" onclick=\"showImageModal('"+ data[i].href  + "')\">" 
+						+ "<div class=\"documentImage\"></div>"  +
 						data[i].text + " - " + data[i].creator + "</div></div>";
 						$(content).appendTo($(".documentDisplayTable"));
 					} else {
-						content = "<div class=\"documentBox\">" + "<div class=\"documentImage\"></div>"
+						content = "<div class=\"documentBox\" onclick=\"showImageModal('"+ data[i].href  + "')\">" 
+						+ "<div class=\"documentImage\"></div>"
 						+ data[i].text + " - " + data[i].creator +"</div></div>";
 						$(content).appendTo($(".documentDisplayTable").children().last());
 					}
@@ -199,7 +208,18 @@
 			});
 		});
 	}
+	function showImageModal(url) {
+		$('#imageModalImage').attr("src", url);
+		$('.imageModal').css({display:"inline-block"});
+		$('.imageModal').animate({opacity:1}, 300);
+	}
 	
+	function hideImageModal() {
+		$('.imageModal').animate({opacity:0}, 300, function (){
+			$('.imageModal').css({display:"none"});
+		});
+		
+	}
 	
 	// Use the function below to add a scroll bar to a div
 // 	$(function() {

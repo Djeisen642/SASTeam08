@@ -263,7 +263,7 @@ body {
 .documentBox {
 	display: table-cell;
 	margin: 20px;
-	width: 200px;
+	min-width: 200px;
 	height: 200px; 
 	background-color: #313131; 
 	border-radius: 4px;
@@ -352,4 +352,24 @@ body {
 
 .chatInput:focus {
 	outline:none;
+}
+
+.imageModal {
+	position: fixed;
+	opacity: 0;
+	display: none;
+	height: 100vh;
+	width: 100vw; 
+	z-index: 5000; 
+	background-color: rgba(0,0,0,.75);
+	text-align: center;
+}
+
+.imageModalImageHelper {
+	display: inline-block;
+    height: 50%;
+}
+
+#imageModalImage {
+	vertical-align: middle; 
 }
