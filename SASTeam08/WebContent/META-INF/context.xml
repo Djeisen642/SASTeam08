@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- This is the Tomcat Context Setup File 
 ("Context" = "this web application") -->
-<Context>
+<Context
+    allowCasualMultipartParsing="true"
+    >
 	<!-- This configures the "Production Instance" of our connection pool. 
 		 Change the following when you are developing:
 		 
@@ -24,5 +26,6 @@
 	driverClassName="com.mysql.jdbc.Driver"
 	maxActive="15" 
 	maxIdle="4"
-	validationQuery="Show Tables"/>
+	validationQuery="Show Tables"
+	/>
 </Context>

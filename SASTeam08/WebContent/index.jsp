@@ -13,9 +13,11 @@
 <html>
 <head>
 <link type="text/css" rel="stylesheet" href="css/style.css" />
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
 <link type="text/css" rel="stylesheet" href="css/jquery.jscrollpane.css"/>
 <script src="javascripts/jquery.js"></script>
 <script src="javascripts/jquery-color.js"></script>
+<script src="javascripts/handleEditing.js"></script>
 <script type="text/javascript" src="./script/jquery.jscrollpane.min.js"></script>
 <script type="text/javascript" src="./script/jquery.mousewheel.js"></script>
 <script type="text/javascript" src="./script/mwheelIntent.js"></script>
@@ -77,6 +79,18 @@
 </div>
 
 <div class="documentDisplay">
+	<div id="editor">
+		<div class="selectedEdit" id="selectedEdit"></div>
+		<div class="editIconBar">
+			<img src="images/user.png" style="width:50px;height:50px" id="userBtn"/>
+			<img src="images/highlightedUser.png" style="width:50px;height:50px" id="huserBtn" />
+			<img src="images/add.png" style="width:50px;height:50px" id="addBtn"/>
+			<img src="images/highlight.png" style="width:50px;height:50px" id="highlightBtn" />
+			<img src="images/vibrate.png" style="width:50px;height:50px" id="vibrateBtn" />
+			<img src="images/archive.png" style="width:50px;height:50px" id="archiveBtn"/>
+		</div>
+		<div class="docEditor" id="docEditor"></div>
+	</div>
 	<div class="documentDisplayTable">
 	</div>
 </div>
@@ -94,6 +108,36 @@
 <div class="imageModal" onclick="hideImageModal()">
 	<span class="imageModalImageHelper"></span>
 		<img id="imageModalImage" src="" />
+</div>
+
+<div class="uploadModal">
+	<span class="uploadActionHelper"></span>
+	<div class="uploadActionBox">
+		<input type="file" id="fileInput"/>
+		
+		<div class="uploadTextInput">
+			<p>
+				<span>
+					Username:
+					<input class="form-control" type="text" id="creatorInput" />
+				</span>
+			</p>
+			<p>
+				<span>
+					Document Title:
+					<input class="form-control" type="text" id="docTitleInput" />
+				</span>
+			</p>
+			<p>
+				<div id="fileToUpload"></div>
+			</p>
+		</div>
+		<div class="uploadUI">
+			<button class="btn btn-default browse_btn" id="browse_btn">Browse</button>
+			<button class="btn btn-primary submit_btn" id="submit_btn">Upload</button>
+			<button class="btn btn-warning close_btn" id="close_btn">Close</button>
+		</div>
+	</div>
 </div>
 
 <div class="chatBar" id="chatBar"></div>
@@ -133,6 +177,7 @@
 				$(".documentDisplay").animate({left:"40px", bottom:"5px", right:"200px"}, 300);
 				$(".chatsReceived").empty();
 				$(".chat").animate({right: "20px"});
+				$("#editor").stop(true, true).fadeIn({ duration: 300, queue: false }).css('display', 'none').slideDown(300); //show editor
 				
 				showingDashboard = false; 
 			//clicking again should show the dashboard
@@ -144,6 +189,7 @@
 				$(".accordion-toggle").not($(this)).animate({opacity:1}, 300);
 				$(".documentDisplay").animate({left:"180px", bottom:"138px", right:"180px"}, 300);
 				$(".chat").animate({right: "-200px"});
+				$("#editor").stop(true, true).fadeOut({ duration: 300, queue: false }).slideUp(300); //hide editor
 				showingDashboard = true;
 			}
 		}
@@ -165,6 +211,7 @@
 	
 	
 	$(document).ready(function($) {
+		$("#editor").hide();
 		$(".activeItem > .accordion-toggle").css({backgroundColor:"#8cb755", borderBottom:0});
 		$(".activeItem > .accordion-toggle").addClass("navBar");
 		var activeId = $(".activeItem > .accordion-toggle").attr("id");

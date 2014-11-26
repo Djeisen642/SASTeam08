@@ -12,9 +12,7 @@
   <context-param>
     <description>Location to store uploaded file</description>
     <param-name>file-upload</param-name>
-    <param-value>
-         ../uploads/
-     </param-value>
+    <param-value>uploads</param-value>
   </context-param>
   <servlet>
     <description></description>
@@ -25,5 +23,15 @@
   <servlet-mapping>
     <servlet-name>DBGetter</servlet-name>
     <url-pattern>/DBGetter</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FileUploadServlet</display-name>
+    <servlet-name>FileUploadServlet</servlet-name>
+    <servlet-class>com.ajax.FileUploadServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FileUploadServlet</servlet-name>
+    <url-pattern>/FileUploadServlet</url-pattern>
   </servlet-mapping>
 </web-app>

@@ -57,5 +57,20 @@ INSERT INTO docs (
 	"Social Media Channel",
 	"Franklin Tort",
 	1
+) , (
+	"uploads/tg1.jpg",
+	"A Delicious Feast",
+	"Joan Montrazuma",
+	2
+) , (
+	"uploads/tg2.gif",
+	"Happy Turkey",
+	"Bradley Cooper",
+	2
+) , (
+	"uploads/tg3.jpg",
+	"Seasonal Cards",
+	"Alice Enchaynes",
+	2
 );
 
