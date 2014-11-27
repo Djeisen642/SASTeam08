@@ -26,8 +26,9 @@ $(document).ready(function ($) {
 				e.stopPropagation();
 				$("#fileInput:hidden").trigger('click');
 			});
-			$('input[type=file]').on('change', prepareupload);
-			$("#submit_btn").on('click', upload_file);
+			$(this).off("click");
+			$('input[type=file]').unbind().on('change', prepareupload);
+			$("#submit_btn").unbind().on('click', upload_file);
 		});
 	});
 	$("#highlightBtn").on("click", function () {
