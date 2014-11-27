@@ -11,6 +11,7 @@ CREATE TABLE docs (
 	creator VARCHAR(100),
 	id SERIAL,
 	campaignId BIGINT UNSIGNED,
+	ext VARCHAR(10),
 	PRIMARY KEY (id),
 	FOREIGN KEY (campaignId) REFERENCES campaigns(id) ON DELETE CASCADE
 	

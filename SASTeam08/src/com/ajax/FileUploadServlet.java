@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -57,7 +58,6 @@ public class FileUploadServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println(request.getParts());
 		int id = Integer.parseInt(request.getParameter("id"));
 		String creator = request.getParameter("creator");
 		String text = request.getParameter("text");
@@ -70,14 +70,17 @@ public class FileUploadServlet extends HttpServlet {
 				System.out.println("FileName="+ getFileName(part));
 				System.out.println("ContentType="+part.getContentType());
 				System.out.println("Size in bytes="+part.getSize());
-				part.write(contextPath+ File.separator + "uploads" +File.separator+ getFileName(part));
-				
+				String filename = getFileName(part);
+				String ext = getExtension(filename);
+				filename += (new Date()).getTime();
+				part.write(contextPath+ File.separator + "uploads" +File.separator+ filename);
+				System.out.println("here");
 				DocBean bean = new DocBean();
 				bean.setCampaignId(id);
 				bean.setCreator(creator);
 				bean.setText(text);
-				bean.setHref("uploads/" + getFileName(part));
-				System.out.println(bean.getCreator() + " " + bean.getText());
+				bean.setExt(ext);
+				bean.setHref("uploads" + File.separator + filename);
 				action.insertDoc(bean);
 			}
 		} catch (Exception e) {
@@ -91,6 +94,12 @@ public class FileUploadServlet extends HttpServlet {
 		out.close();
 	}
 	
+	public static String getExtension(String filename) {
+		String[] array  = filename.split("[.]");
+		String ext = array[array.length - 1];
+		return ext; 
+	}
+	
 	public static String getFileName(Part filePart)
 	{
 	    String header = filePart.getHeader("content-disposition");
@@ -99,7 +108,7 @@ public class FileUploadServlet extends HttpServlet {
 	        if(headerPart.trim().startsWith("filename"))
 	        {
 	            return headerPart.substring(headerPart.indexOf('=') + 1).trim()
-	                             .replace("\"", "");
+	                             .replace("\"", "").replaceAll(" ", "");
 	        }
 	    }
 	    return null;

@@ -69,14 +69,13 @@ public class CampaignDAO {
 		PreparedStatement ps = null;
 		try {
 			conn = factory.getConnection();
-			ps = conn.prepareStatement("INSERT INTO `docs` (href, text, campaignId, creator) "
-					+ "VALUES(?, ?, ?, ?)");
+			ps = conn.prepareStatement("INSERT INTO `docs` (href, text, campaignId, creator, ext) "
+					+ "VALUES(?, ?, ?, ?, ?)");
 			docLoader.loadParameters(ps, bean);
-			System.out.println(ps.toString());
 			ps.executeUpdate();
 			ps.close();
 		} catch (SQLException e) {
-			System.out.println("Database error" + e.getMessage() );
+			System.out.println("Database error...");
 		} finally {
 			DBUtil.closeConnection(conn, ps);
 		}

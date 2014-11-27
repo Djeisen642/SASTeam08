@@ -27,6 +27,7 @@ public class DocsBeanLoader implements BeanLoader<DocBean> {
 		bean.setCampaignId(rs.getInt("campaignId"));
 		bean.setId(rs.getInt("id"));
 		bean.setCreator(rs.getString("creator"));
+		bean.setExt(rs.getString("ext"));
 		return bean;
 	}
 
@@ -37,6 +38,7 @@ public class DocsBeanLoader implements BeanLoader<DocBean> {
 		ps.setString(2, bean.getText());
 		ps.setInt(3, bean.getCampaignId());
 		ps.setString(4, bean.getCreator());
+		ps.setString(5, bean.getExt());
 		return ps;
 	}
 

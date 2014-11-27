@@ -178,6 +178,7 @@
 				$(".chatsReceived").empty();
 				$(".chat").animate({right: "20px"});
 				$("#editor").stop(true, true).fadeIn({ duration: 300, queue: false }).css('display', 'none').slideDown(300); //show editor
+				$(".documentDisplay").css({zIndex:"102"});
 				
 				showingDashboard = false; 
 			//clicking again should show the dashboard
@@ -190,6 +191,7 @@
 				$(".documentDisplay").animate({left:"180px", bottom:"138px", right:"180px"}, 300);
 				$(".chat").animate({right: "-200px"});
 				$("#editor").stop(true, true).fadeOut({ duration: 300, queue: false }).slideUp(300); //hide editor
+				$(".documentDisplay").css({zIndex:"10"});
 				showingDashboard = true;
 			}
 		}
@@ -248,7 +250,15 @@
 						+ data[i].text + " - " + data[i].creator +"</div></div>";
 						$(content).appendTo($(".documentDisplayTable").children().last());
 					}
-					$(".documentDisplayTable").children().last().children().last().children().first().css('background-image', 'url(' + data[i].href + ')');
+					console.log(data[i].ext);
+					if (data[i].ext === "png" || data[i].ext ==="gif" || data[i].ext === "jpg") { //show image or show the doc type
+						$(".documentDisplayTable").children().last().children().last().children().first().css('background-image', 'url(' + data[i].href + ')');
+					} else {
+						$(".documentDisplayTable").children().last().children().last().children().first().css('background-image', 'url(\'images/file.png\')');
+						$(".documentDisplayTable").children().last().children().last().children().first().html( data[i].ext );
+						$(".documentDisplayTable").children().last().children().last().children().first().css({fontSize: "20px", verticalAlign:"middle"}); 
+						$(".documentDisplayTable").children().last().children().last().attr("onclick", "");
+					}
 					
 				}
 				$(".documentDisplay").fadeIn();

@@ -52,6 +52,7 @@ public class DBGetter extends HttpServlet {
 			s += "\"text\":\"" + o.getString("text") + "\",";
 			s += "\"campaignId\":\"" + o.getInt("campaignId") + "\",";
 			s += "\"creator\":\"" + o.getString("creator") + "\",";
+			s += "\"ext\":\"" + o.getString("ext") + "\",";
 			s += "\"id\":\"" + o.getInt("id") + "\"";
 			if (i != jsonArray.length() - 1) {
 				s += "},";
@@ -72,6 +73,7 @@ public class DBGetter extends HttpServlet {
 			obj.put("text", list.get(i).getText());
 			obj.put("id", list.get(i).getId());
 			obj.put("creator", list.get(i).getCreator());
+			obj.put("ext", list.get(i).getExt());
 			array.put(obj);
 		}
 		return array;

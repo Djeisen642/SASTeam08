@@ -4,6 +4,19 @@ public class DocBean {
 	private String href; 
 	private String text;
 	private String creator;
+	private String ext; 
+	/**
+	 * @return the ext
+	 */
+	public String getExt() {
+		return ext;
+	}
+	/**
+	 * @param ext the ext to set
+	 */
+	public void setExt(String ext) {
+		this.ext = ext;
+	}
 	/**
 	 * @return the creator
 	 */
