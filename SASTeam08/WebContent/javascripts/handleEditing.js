@@ -44,7 +44,6 @@ $(document).ready(function ($) {
 	
 function prepareupload (event) {
 	files = event.target.files;
-	console.log(files[0].name);
 	$("#fileToUpload").html(files[0].name);
 	creator = $("#creatorInput").val();
 	text = $("#docTitleInput").val();
@@ -71,7 +70,6 @@ function upload_file(event) {
         contentType: false, // Set content type to false as jQuery will tell the server its a query string request
         success: function(data, textStatus, jqXHR)
         {
-        	console.log(data);
         	$(".uploadModal").animate({opacity:"0"}, 300, function(){
         		$(".uploadModal").css({display:"none"});
         		$('#fileToUpload').html("");
@@ -89,10 +87,16 @@ function upload_file(event) {
 }
 
 function handleDeleteFile(id, campaignId, href) {
-	console.log(href);
 	$.post("DeleteFileServlet?id=" + id + "&href=" + href, function(data) {
 		console.log(data);
 		getDocs(campaignId, href);
 		clickedDelete = false; 
 	});
+}
+
+function downloadFile(href) {
+	if (!clickedDelete) {
+		var win = window.open(href, '_blank');
+		win.focus();
+	}
 }

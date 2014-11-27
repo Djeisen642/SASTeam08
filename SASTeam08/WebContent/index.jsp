@@ -260,7 +260,7 @@
 						$(".documentDisplayTable").children().last().children().last().children().first().css('background-image', 'url(\'images/file.png\')');
 						$(".documentDisplayTable").children().last().children().last().children().first().html( data[i].ext );
 						$(".documentDisplayTable").children().last().children().last().children().first().css({fontSize: "20px", verticalAlign:"middle"}); 
-						$(".documentDisplayTable").children().last().children().last().attr("onclick", "");
+						$(".documentDisplayTable").children().last().children().last().attr("onclick", "downloadFile(\""+ data[i].href + "\")");
 					}
 					$(".documentDisplayTable").children().last().children().last().hover(function() {
 						$(this).find(".deleteBtn").show();

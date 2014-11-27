@@ -71,8 +71,9 @@ public class FileUploadServlet extends HttpServlet {
 				System.out.println("ContentType="+part.getContentType());
 				System.out.println("Size in bytes="+part.getSize());
 				String filename = getFileName(part);
+				String name = getNameMinusExtension(filename);
 				String ext = getExtension(filename);
-				filename += (new Date()).getTime();
+				filename = name +  (new Date()).getTime() + ext;
 				part.write(contextPath+ File.separator + "uploads" +File.separator+ filename);
 				System.out.println("here");
 				DocBean bean = new DocBean();
@@ -94,6 +95,12 @@ public class FileUploadServlet extends HttpServlet {
 		out.close();
 	}
 	
+	private String getNameMinusExtension(String filename) {
+		String[] array  = filename.split("[.]");
+		String ext = array[0];
+		return ext; 
+	}
+
 	public static String getExtension(String filename) {
 		String[] array  = filename.split("[.]");
 		String ext = array[array.length - 1];
