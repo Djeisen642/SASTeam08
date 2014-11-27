@@ -31,4 +31,8 @@ public class mainAction {
 		dao.insertDoc(bean);
 	}
 	
+	public void deleteDoc(int id) {
+		dao.deleteDoc(id);
+	}
+	
 }

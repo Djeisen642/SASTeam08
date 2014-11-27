@@ -232,21 +232,24 @@
 		var element = document.getElementById("chatsReceived");
 		element.scrollTop = element.scrollHeight;
 	}
+	
 	function getDocs(id) {
 		$('.documentDisplay').fadeOut(function () {
-			$(".documentDisplayTable").empty();
 			$.get("DBGetter?id=" + id, function (data) {
+				$(".documentDisplayTable").empty();
 				for (var i = 0; i < data.length; i++) {
 					var content;
 					if ( i % 3 === 0) {
 						content = "<div class=\"documentRow\">" +  
 						"<div class=\"documentBox\" onclick=\"showImageModal('"+ data[i].href  + "')\">" 
-						+ "<div class=\"documentImage\"></div>"  +
+						 +  "<div class=\"documentImage\"></div>" + "<div class=\"deleteBtn\" id=\"" + data[i].id + "\"><i class=\"glyphicon glyphicon-trash\" /></div>"
+						 + "<input type=\"hidden\" class=\"docHref\" value=\""+ data[i].href +"\">"+
 						data[i].text + " - " + data[i].creator + "</div></div>";
 						$(content).appendTo($(".documentDisplayTable"));
 					} else {
 						content = "<div class=\"documentBox\" onclick=\"showImageModal('"+ data[i].href  + "')\">" 
-						+ "<div class=\"documentImage\"></div>"
+						 + "<div class=\"documentImage\"></div>" + "<div class=\"deleteBtn\" id=\"" + data[i].id + "\"><i class=\"glyphicon glyphicon-trash\" /></div>"
+						 + "<input type=\"hidden\" class=\"docHref\" value=\""+ data[i].href +"\">"
 						+ data[i].text + " - " + data[i].creator +"</div></div>";
 						$(content).appendTo($(".documentDisplayTable").children().last());
 					}
@@ -259,6 +262,16 @@
 						$(".documentDisplayTable").children().last().children().last().children().first().css({fontSize: "20px", verticalAlign:"middle"}); 
 						$(".documentDisplayTable").children().last().children().last().attr("onclick", "");
 					}
+					$(".documentDisplayTable").children().last().children().last().hover(function() {
+						$(this).find(".deleteBtn").show();
+						var thisBox = $(this);
+						$(this).find(".deleteBtn").on("click", function () {
+							clickedDelete = true;
+							handleDeleteFile($(this).attr("id"), $("#activeItem > .accordion-toggle").attr("id"), thisBox.find(".docHref").val());
+						});
+					}, function () {
+						$(this).find(".deleteBtn").hide();
+					});
 					
 				}
 				$(".documentDisplay").fadeIn();
@@ -266,9 +279,11 @@
 		});
 	}
 	function showImageModal(url) {
-		$('#imageModalImage').attr("src", url);
-		$('.imageModal').css({display:"inline-block"});
-		$('.imageModal').animate({opacity:1}, 300);
+		if (!clickedDelete) {
+			$('#imageModalImage').attr("src", url);
+			$('.imageModal').css({display:"inline-block"});
+			$('.imageModal').animate({opacity:1}, 300);
+		}
 	}
 	
 	function hideImageModal() {
@@ -277,7 +292,7 @@
 		});
 		
 	}
-	
+	var clickedDelete = false; 
 	// Use the function below to add a scroll bar to a div
 // 	$(function() {
 // 		$('.dashboard').jScrollPane();

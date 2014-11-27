@@ -81,4 +81,20 @@ public class CampaignDAO {
 		}
 	}
 	
+	public void deleteDoc(int id) {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		try {
+			conn = factory.getConnection();
+			ps = conn.prepareStatement("DELETE FROM docs WHERE id=?");
+			ps.setInt(1, id);
+			ps.executeUpdate();
+			ps.close();
+		} catch (SQLException e) {
+			System.out.println("Database error...");
+		} finally {
+			DBUtil.closeConnection(conn, ps);
+		}
+	}
+	
 }

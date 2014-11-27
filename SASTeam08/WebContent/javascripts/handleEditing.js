@@ -21,8 +21,9 @@ $(document).ready(function ($) {
 			});
 			// handle image upload
 			var files;
-			$("#browse_btn").on('click', function (e) {
+			$("#browse_btn").unbind().on('click', function (e) {
 				e.preventDefault();
+				e.stopPropagation();
 				$("#fileInput:hidden").trigger('click');
 			});
 			$('input[type=file]').on('change', prepareupload);
@@ -84,4 +85,13 @@ function upload_file(event) {
         	console.log('ERRORS: ' + textStatus);
         }
     });
+}
+
+function handleDeleteFile(id, campaignId, href) {
+	console.log(href);
+	$.post("DeleteFileServlet?id=" + id + "&href=" + href, function(data) {
+		console.log(data);
+		getDocs(campaignId, href);
+		clickedDelete = false; 
+	});
 }

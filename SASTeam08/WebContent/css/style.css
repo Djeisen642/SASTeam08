@@ -306,6 +306,25 @@ body {
 	padding: 10px;
 	overflow: hidden;
 	cursor: pointer;
+	position: relative;
+}
+
+.deleteBtn {
+	position: absolute; 
+	border-radius: 2px;
+	padding: 2px;
+	right:0;
+	top:0;
+	font-size: 20px;
+	color:white;
+	background-color: #888888;
+	z-index:140;
+	opacity: .75;
+	display:none;
+}
+
+.deleteBtn:hover {
+	opacity: 1;
 }
 
 .documentImage {
