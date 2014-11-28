@@ -26,6 +26,16 @@
 	driverClassName="com.mysql.jdbc.Driver"
 	maxActive="15" 
 	maxIdle="4"
-	validationQuery="Show Tables"
-	/>
+	validationQuery="Show Tables"/>
+
+<Realm
+		className="org.apache.catalina.realm.DataSourceRealm" 
+		localDataSource="true"
+		debug="99"
+	    dataSourceName="jdbc/sasteam08"
+		userTable="users"
+		userNameCol="username"
+		userCredCol="Password"
+		userRoleTable="users"
+		roleNameCol="role" />
 </Context>

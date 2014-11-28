@@ -84,3 +84,15 @@ INSERT INTO docs (
 	"jpg"
 );
 
+INSERT INTO users (UID, username, lastName, firstName, password, role) 
+VALUES
+(1, 'tdeckard', 'Deckard', 'Taylor', 'password', 'admin'),
+(2, 'jsuttles', 'Suttles', 'Jason', 'password', 'admin'),
+(3, 'ftort', 'Tort', 'Franklin', 'password', 'user'),
+(4, 'jmontrazuma', 'Montrazuma', 'Joan', 'password', 'user'),
+(5, 'bcooper', 'Cooper', 'Bradley', 'password', 'user'),
+(6, 'aenchaynes', 'Enchaynes', 'Alice', 'password', 'user'),
+(7, 'cpeters', 'Peters', 'Cynthia', 'password', 'user'),
+(8, 'bglass', 'Glass', 'Becky', 'password', 'user'),
+(9, 'mcasey', 'Casey', 'Matt', 'password', 'user'),
+(10, 'rpepper', 'Pepper', 'Ralph', 'password', 'user');

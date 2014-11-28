@@ -73,7 +73,7 @@ body {
 	width: 140px;
 	position: absolute;
 	bottom: 15px;
-	left: 17px;
+	left: 12px;
 }
 
 .accordion {
@@ -335,10 +335,10 @@ body {
 
 .chat {
 	position:fixed;
-	right:-200px;
+	right: -200px;
 	top: 120px;
 	bottom: 20px;
-	width: 175px; 
+	width: 200px; 
 	background-color: #CACACA;
 	z-index:200;
 	border-radius: 5px;
@@ -360,14 +360,15 @@ body {
 	border-radius:5px;
 	padding: 3px;
 	overflow: hidden;
+	width: 188px;
 }
 
 .chatsReceived {
 	position: absolute;
 	top: 0px;
-	bottom: 65px;
-	right: -15px;
+	right: 0px;
 	margin: 6px;
+	margin-bottom: 65px;
 	overflow-y:auto;
 	word-wrap: break-word;
 }
@@ -386,13 +387,13 @@ body {
 	font-family: "Arial", Serif;
 	box-shadow: 0px 2px 10px white inset;
 	margin-bottom: 5px;
-	margin-right: 15px;
+	margin-right: 5px;
 	display:inline-block;
-	width: 100px;
+	width: 149px;
 }
 
 .chatBubbleAvatar {
-	vertical-align: bottom;
+	vertical-align: top;
 	height: 40px;
 	width: 30px;
 	display:inline-block;
@@ -482,4 +483,62 @@ body {
 	text-align: left;
 	position: absolute;
 	left: 30%;
+}
+
+.splashLogo {
+	height: 300px;
+	width: 300px;
+	margin-top: 150px;
+    margin-left: auto;
+    margin-right: auto;
+	background-image: url("../images/bigLogo.png");
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+.footer {
+	position:absolute;
+	bottom:10px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 75px;
+    width:100%;
+    background-size:contain;
+    background-repeat:no-repeat;
+    background-image: url("../images/sas_bar.png");
+    background-position: center;
+}
+
+.loginForm {
+	text-align: center;
+}
+
+.loginBubble {
+	width: 250px;
+	height: 40px;
+	margin: 5px;
+	background-color: #c9c9c9; 
+	color: black;
+	text-align: center;
+	border-color: #1e76b5;
+	border-radius: 10px;
+	box-shadow:2px 3px 3px 2px rgba(0,0,0,0.45); 
+}
+.loginBubble:focus {
+	outline: none; 
+}
+
+::-webkit-input-placeholder { /* WebKit browsers */
+    color:    black;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    black;
+   opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    black;
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+   color:    black;
 }

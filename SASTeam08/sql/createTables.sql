@@ -16,3 +16,14 @@ CREATE TABLE docs (
 	FOREIGN KEY (campaignId) REFERENCES campaigns(id) ON DELETE CASCADE
 	
 ) ENGINE=innoDB;
+
+
+CREATE TABLE users(
+	UID                 BIGINT unsigned,
+	username			VARCHAR(35),
+	lastName 			VARCHAR(35) NOT NULL default '',
+	firstName 			VARCHAR(35) NOT NULL default '',
+	password            VARCHAR(200),
+	role                enum('admin','user') NOT NULL DEFAULT 'admin',
+	PRIMARY KEY (UID)
+) ENGINE=innoDB;

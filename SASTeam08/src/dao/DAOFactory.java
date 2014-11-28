@@ -50,6 +50,14 @@ public class DAOFactory {
 
 	/**
 	 * 
+	 * @return this DAOFactory's AuthDAO
+	 */
+	public AuthDAO getAuthDAO() {
+		return new AuthDAO(this);
+	}
+	
+	/**
+	 * 
 	 * @return this DAOFactory's AccessDAO
 	 */
 	/*public AccessDAO getAccessDAO() {
