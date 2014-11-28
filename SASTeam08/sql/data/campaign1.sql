@@ -29,55 +29,55 @@ INSERT INTO docs (
 	campaignId,
 	ext
 ) VALUES (
-	"/SASTeam08/uploads/img1.png",
+	"../uploads/img1.png",
 	"A photo to test the database...",
 	"Taylor Deckard",
 	1,
 	"png"
 ) , (
-	"/SASTeam08/uploads/img2.png",
+	"../uploads/img2.png",
 	"Social Media Channel",
 	"Franklin Tort",
 	1,
 	"png"
 ) , (
-	"/SASTeam08/uploads/img3.png",
+	"../uploads/img3.png",
 	"Customer Output",
 	"Franklin Tort",
 	1,
 	"png"
 ) , (
-	"/SASTeam08/uploads/img4.png",
+	"../uploads/img4.png",
 	"Can Food Sale Increase",
 	"Cynthia Peters",
 	1,
 	"png"
 ) , (
-	"/SASTeam08/uploads/img5.png",
+	"../uploads/img5.png",
 	"National Response",
 	"Franklin Tort",
 	1,
 	"png"
 ) , (
-	"/SASTeam08/uploads/img6.png",
+	"../uploads/img6.png",
 	"Social Media Channel",
 	"Franklin Tort",
 	1,
 	"png"
 ) , (
-	"/SASTeam08/uploads/tg1.jpg",
+	"../uploads/tg1.jpg",
 	"A Delicious Feast",
 	"Joan Montrazuma",
 	2,
 	"jpg"
 ) , (
-	"/SASTeam08/uploads/tg2.gif",
+	"../uploads/tg2.gif",
 	"Happy Turkey",
 	"Bradley Cooper",
 	2,
 	"gif"
 ) , (
-	"/SASTeam08/uploads/tg3.jpg",
+	"../uploads/tg3.jpg",
 	"Seasonal Cards",
 	"Alice Enchaynes",
 	2,

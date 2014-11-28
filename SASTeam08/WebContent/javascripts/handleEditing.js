@@ -8,6 +8,8 @@ $(document).ready(function ($) {
 		$("#selectedEdit").animate({left:"60px"}, 300);
 	});
 	$("#addBtn").on("click", function () {
+		files = null;
+		$('input[type=file]').val("");
 		$("#selectedEdit").animate({left:"114px"}, 300, function () {
 			$('.uploadModal').css({display:"inline-block"});
 			$('.uploadModal').animate({opacity:1}, 300);
@@ -20,7 +22,6 @@ $(document).ready(function ($) {
         		$("#docTitleInput").val("");
 			});
 			// handle image upload
-			var files;
 			$("#browse_btn").unbind().on('click', function (e) {
 				e.preventDefault();
 				e.stopPropagation();

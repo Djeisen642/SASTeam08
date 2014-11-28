@@ -74,19 +74,19 @@ public class FileUploadServlet extends HttpServlet {
 				String name = getNameMinusExtension(filename);
 				String ext = getExtension(filename);
 				filename = name +  (new Date()).getTime() + ext;
-				part.write(contextPath+ File.separator + "/SASTeam08/uploads" +File.separator+ filename);
+				part.write(contextPath+ File.separator + "/uploads" +File.separator+ filename);
 				System.out.println("here");
 				DocBean bean = new DocBean();
 				bean.setCampaignId(id);
 				bean.setCreator(creator);
 				bean.setText(text);
 				bean.setExt(ext);
-				bean.setHref("/SASTeam08/uploads" + File.separator + filename);
+				bean.setHref("../uploads" + File.separator + filename);
 				action.insertDoc(bean);
 			}
 		} catch (Exception e) {
 			out.write("Exception in uploading file.");
-			System.out.println("Exception in uploading file.");
+			System.out.println(e.getMessage());
 		} 
 		
 		System.out.println("...File uploaded");

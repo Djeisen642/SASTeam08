@@ -45,8 +45,9 @@ public class DeleteFileServlet extends HttpServlet {
 		//Get the absolute path from context
 		ServletContext ctx = getServletContext();
 		String contextPath = ctx.getRealPath(File.separator);
-		
-		File f = new File(contextPath + File.separator + href);
+	
+		String new_href = href.replace("../", "");
+		File f = new File(contextPath + File.separator + new_href);
 		boolean deleted = f.delete();
 		
 		
