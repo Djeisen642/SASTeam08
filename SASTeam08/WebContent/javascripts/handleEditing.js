@@ -62,7 +62,7 @@ function upload_file(event) {
 	});
     
     $.ajax({
-        url: "FileUploadServlet?id=" + id + "&creator=" + creator + "&text=" + text,
+        url: "/SASTeam08/FileUploadServlet?id=" + id + "&creator=" + creator + "&text=" + text,
         type: 'POST',
         data: data,
         cache: false,
@@ -70,6 +70,7 @@ function upload_file(event) {
         contentType: false, // Set content type to false as jQuery will tell the server its a query string request
         success: function(data, textStatus, jqXHR)
         {
+        	console.log(data);
         	$(".uploadModal").animate({opacity:"0"}, 300, function(){
         		$(".uploadModal").css({display:"none"});
         		$('#fileToUpload').html("");
@@ -87,7 +88,7 @@ function upload_file(event) {
 }
 
 function handleDeleteFile(id, campaignId, href) {
-	$.post("DeleteFileServlet?id=" + id + "&href=" + href, function(data) {
+	$.post("/SASTeam08/DeleteFileServlet?id=" + id + "&href=" + href, function(data) {
 		console.log(data);
 		getDocs(campaignId, href);
 		clickedDelete = false; 

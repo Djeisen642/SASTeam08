@@ -315,24 +315,24 @@ if(request.getUserPrincipal() != null) {
 						var content;
 						if (i % 3 === 0) {
 							content = "<div class=\"documentRow\">"
-									+ "<div class=\"documentBox\" onclick=\"showImageModal('/SASTeam08/"
+									+ "<div class=\"documentBox\" onclick=\"showImageModal('"
 									+ data[i].href
 									+ "')\">"
 									+ "<div class=\"documentImage\"></div>"
-									+ "<div class=\"deleteBtn\" id=\"/SASTeam08/" + data[i].id + "\"><i class=\"glyphicon glyphicon-trash\" /></div>"
-									+ "<input type=\"hidden\" class=\"docHref\" value=\"/SASTeam08/"+ data[i].href +"\">"
+									+ "<div class=\"deleteBtn\" id=\"" + data[i].id + "\"><i class=\"glyphicon glyphicon-trash\" /></div>"
+									+ "<input type=\"hidden\" class=\"docHref\" value=\""+ data[i].href +"\">"
 									+ data[i].text
 									+ " - "
 									+ data[i].creator
 									+ "</div></div>";
 							$(content).appendTo($(".documentDisplayTable"));
 						} else {
-							content = "<div class=\"documentBox\" onclick=\"showImageModal('/SASTeam08/"
+							content = "<div class=\"documentBox\" onclick=\"showImageModal('"
 									+ data[i].href
 									+ "')\">"
 									+ "<div class=\"documentImage\"></div>"
-									+ "<div class=\"deleteBtn\" id=\"/SASTeam08/" + data[i].id + "\"><i class=\"glyphicon glyphicon-trash\" /></div>"
-									+ "<input type=\"hidden\" class=\"docHref\" value=\"/SASTeam08/"+ data[i].href +"\">"
+									+ "<div class=\"deleteBtn\" id=\"" + data[i].id + "\"><i class=\"glyphicon glyphicon-trash\" /></div>"
+									+ "<input type=\"hidden\" class=\"docHref\" value=\""+ data[i].href +"\">"
 									+ data[i].text
 									+ " - "
 									+ data[i].creator
@@ -350,7 +350,7 @@ if(request.getUserPrincipal() != null) {
 								.last()
 								.children()
 								.first()
-								.css('background-image','url(/SASTeam08/'
+								.css('background-image','url('
 												+ data[i].href
 												+ ')');
 						} else {
@@ -387,7 +387,7 @@ if(request.getUserPrincipal() != null) {
 								.last()
 								.children()
 								.last()
-								.attr("onclick", "downloadFile(\"/SASTeam08/"+ data[i].href + "\")");
+								.attr("onclick", "downloadFile(\""+ data[i].href + "\")");
 						}
 						$(".documentDisplayTable")
 							.children()
