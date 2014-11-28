@@ -387,7 +387,7 @@ if(request.getUserPrincipal() != null) {
 								.last()
 								.children()
 								.last()
-								.attr("onclick","");
+								.attr("onclick", "downloadFile(\"/SASTeam08/"+ data[i].href + "\")");
 						}
 						$(".documentDisplayTable")
 							.children()
