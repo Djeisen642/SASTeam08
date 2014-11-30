@@ -9,6 +9,7 @@ $(document).ready(function ($) {
 	});
 	$("#addBtn").on("click", function () {
 		files = null;
+		$("#creatorInput").val($('#username').val());
 		$('input[type=file]').val("");
 		$("#selectedEdit").animate({left:"114px"}, 300, function () {
 			$('.uploadModal').css({display:"inline-block"});
