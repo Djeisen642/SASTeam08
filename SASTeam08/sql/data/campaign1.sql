@@ -84,15 +84,15 @@ INSERT INTO docs (
 	"jpg"
 );
 
-INSERT INTO users (UID, username, lastName, firstName, password, role) 
+INSERT INTO users (username, lastName, firstName, password, avatar, role) 
 VALUES
-(1, 'tdeckard', 'Deckard', 'Taylor', 'password', 'admin'),
-(2, 'jsuttles', 'Suttles', 'Jason', 'password', 'admin'),
-(3, 'ftort', 'Tort', 'Franklin', 'password', 'user'),
-(4, 'jmontrazuma', 'Montrazuma', 'Joan', 'password', 'user'),
-(5, 'bcooper', 'Cooper', 'Bradley', 'password', 'user'),
-(6, 'aenchaynes', 'Enchaynes', 'Alice', 'password', 'user'),
-(7, 'cpeters', 'Peters', 'Cynthia', 'password', 'user'),
-(8, 'bglass', 'Glass', 'Becky', 'password', 'user'),
-(9, 'mcasey', 'Casey', 'Matt', 'password', 'user'),
-(10, 'rpepper', 'Pepper', 'Ralph', 'password', 'user');
+('tdeckard', 'Deckard', 'Taylor', 'password', '/SASTeam08/images/chatAvatarBlack.png', 'admin'),
+('jsuttles', 'Suttles', 'Jason', 'password', '/SASTeam08/images/chatAvatarGreen.png', 'admin'),
+('ftort', 'Tort', 'Franklin', 'password', '/SASTeam08/images/chatAvatarYellow.png', 'user'),
+('jmontrazuma', 'Montrazuma', 'Joan', 'password', '/SASTeam08/images/chatAvatarOrange.png', 'user'),
+('bcooper', 'Cooper', 'Bradley', 'password', '/SASTeam08/images/chatAvatarRed.png', 'user'),
+('aenchaynes', 'Enchaynes', 'Alice', 'password', '/SASTeam08/images/chatAvatarPurple.png', 'user'),
+('cpeters', 'Peters', 'Cynthia', 'password', '/SASTeam08/images/chatAvatarBlue.png', 'user'),
+('bglass', 'Glass', 'Becky', 'password', '/SASTeam08/images/chatAvatarBlue.png', 'user'),
+('mcasey', 'Casey', 'Matt', 'password', '/SASTeam08/images/chatAvatarBlue.png', 'user'),
+('rpepper', 'Pepper', 'Ralph', 'password', '/SASTeam08/images/chatAvatarBlue.png', 'user');

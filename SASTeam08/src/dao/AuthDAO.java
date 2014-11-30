@@ -74,4 +74,37 @@ public class AuthDAO {
 		}
 	}
 
+	/**
+	 * Returns the link to the user's avatar
+	 * 
+	 * @param username the username of the user
+	 * @return A String representing the link to the user's avatar
+	 * @throws SASException
+	 * @throws DBException
+	 */
+	public String getAvatar(final String username)  throws SASException, DBException {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = factory.getConnection();
+			pstmt = conn.prepareStatement("SELECT avatar FROM users WHERE username=?");
+			pstmt.setString(1, username);
+			ResultSet results;
+
+			results = pstmt.executeQuery();
+			if (results.next()) {
+				final String result = results.getString("avatar"); 
+				results.close();
+				pstmt.close();
+				return result;
+			} else {
+				throw new SASException("User does not exist");
+			}
+		} catch (SQLException e) {
+			
+			throw new DBException(e);
+		} finally {
+			DBUtil.closeConnection(conn, pstmt);
+		}
+	}
 }

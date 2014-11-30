@@ -12,6 +12,7 @@ String userName     = null;
 String fullName		= null;
 String errorMessage = null;
 String selectedPatientName = null;
+String avatar		= null;
 
 boolean validSession = true;
 

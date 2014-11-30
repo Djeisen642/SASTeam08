@@ -12,6 +12,7 @@
 
 if(request.getUserPrincipal() != null) {
 	userName = authDAO.getName(request.getUserPrincipal().getName());
+	avatar = authDAO.getAvatar(request.getUserPrincipal().getName());
 }
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -266,20 +267,76 @@ if(request.getUserPrincipal() != null) {
 			});
 
 	// handle chat functionality
-	$(".chatInput")
-			.on("keyup", function(e) {
-					var code = (e.keycode) ? e.keycode : e.which;
-					if (code === 13) {
-						var chatItem = "<div class=\"chatItem\">";
-						var img = "<img class=\"chatBubbleAvatar\" src=\"/SASTeam08/images/chatAvatar.png\" title=\"" + '<%=userName%>' + "\"/>";
-						var submit = "<div class=\"chatBubble\">"
-								+ $('.chatInput').val() + "</div></div>";
-						$(chatItem + img + submit).appendTo(
-								$('.chatsReceived'));
-						updateChatScroller();
-						$('.chatInput').val("");
-					}
-				});
+// 	$(".chatInput")
+// 			.on("keyup", function(e) {
+// 					var code = (e.keycode) ? e.keycode : e.which;
+// 					if (code === 13) {
+// 						var chatItem = "<div class=\"chatItem\">";
+<%-- 						var img = "<img class=\"chatBubbleAvatar\" src=\"/SASTeam08/images/chatAvatar.png\" title=\"" + '<%=userName%>' + "\"/>"; --%>
+// 						var submit = "<div class=\"chatBubble\">"
+// 								+ $('.chatInput').val() + "</div></div>";
+// 						$(chatItem + img + submit).appendTo(
+// 								$('.chatsReceived'));
+// 						updateChatScroller();
+// 						$('.chatInput').val("");
+// 					}
+// 				});
+	var wsocket;
+	var userName;
+	var serviceLocation = "ws:localhost:8080/SASTeam08/chat/";
+	var $message;
+	var $chatWindow;
+	var chatting;
+	var room = '';
+	var avatar;
+
+	$('.chatInput').on("keyup", function(evt) {
+		var code = (evt.keycode) ? evt.keycode : evt.which;
+		if (code === 13) {
+			$message.val($message.val().replace(/(\r\n|\n|\r)/gm,""));
+			evt.preventDefault();
+			sendMessage();
+		}
+	});
+
+	function onMessageReceived(evt) {
+		//var msg = eval('(' + evt.data + ')');
+		var msg = JSON.parse(evt.data); // native API
+		var chatItem = "<div class=\"chatItem\">";
+		var img = "<img class=\"chatBubbleAvatar\" src=\""+ msg.avatar +"\" title=\"" + msg.sender + "\"/>";
+		var submit = "<div class=\"chatBubble\">"
+				+ msg.message + "</div></div>";
+		$(chatItem + img + submit).appendTo(
+				$('.chatsReceived'));
+		updateChatScroller();
+		$('.chatInput').val("");
+// 		var $messageLine = $('<tr><td class="received">' + msg.received
+// 				+ '</td><td class="user label label-info">' + msg.sender
+// 				+ '</td><td class="message badge">' + msg.message
+// 				+ '</td></tr>');
+// 		$chatWindow.append($messageLine);
+	}
+	function sendMessage() {
+		var msg = '{"message":"' + $message.val() + '", "sender":"'
+				+ userName + '", "received":"", "avatar":"' + avatar +'"}';
+		wsocket.send(msg);
+	}
+ 
+	function connectToChatserver() {
+		if (!chatting) {
+			room = "here";
+			wsocket = new WebSocket(serviceLocation + room);
+			wsocket.onmessage = onMessageReceived;
+			chatting = true;
+		} else {
+			wsocket.close();
+			chatting = false;
+		}
+	}
+ 
+	function leaveRoom() {
+		wsocket.close();
+	}
 
 	$(document).ready(function($) {
 		$("#editor").hide();
@@ -290,6 +347,18 @@ if(request.getUserPrincipal() != null) {
 		$(".activeItem > .accordion-toggle").addClass("navBar");
 		var activeId = $(".activeItem > .accordion-toggle").attr("id");
 		getDocs(activeId);
+		
+		userName = "<%=userName%>";
+		avatar = "<%=avatar%>";
+		$message = $('.chatInput');
+		$chatWindow = $('.chatsReceived');
+		$('.accordion-header').click(function(evt) {
+			evt.preventDefault();
+			connectToChatserver();
+		});
+		$('#user').click(function(){
+			leaveRoom();
+		});
 		/*$('#dock').find('.accordion-toggle').click(function(){
 			
 			    //Expand or collapse this panel
