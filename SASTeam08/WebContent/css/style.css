@@ -368,8 +368,8 @@ body {
 	position: absolute;
 	top: 0px;
 	right: 0px;
+	bottom: 65px;
 	margin: 6px;
-	margin-bottom: 65px;
 	overflow-y:auto;
 	word-wrap: break-word;
 }

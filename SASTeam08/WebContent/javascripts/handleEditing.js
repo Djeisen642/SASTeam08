@@ -18,7 +18,7 @@ $(document).ready(function ($) {
 					$('.uploadModal').css({display:"none"});
 				});
 				$('#fileToUpload').html(""); // set all values back to null
-				$("#creatorInput").val("");
+				$("#creatorInput").val($('#username').val());
         		$("#docTitleInput").val("");
 			});
 			// handle image upload

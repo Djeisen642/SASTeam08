@@ -123,9 +123,10 @@ if(request.getUserPrincipal() != null) {
 
 			<div class="uploadTextInput">
 				<p>
-					<span> Username: <input class="form-control" type="text"
+					<span> Name: <input class="form-control" type="text"
 						id="creatorInput" />
 					</span>
+					<input type="hidden" id="username" value="<%= userName %>" />
 				</p>
 				<p>
 					<span> Document Title: <input class="form-control"
