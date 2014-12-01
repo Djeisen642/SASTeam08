@@ -150,7 +150,7 @@ if(request.getUserPrincipal() != null) {
 <script>
 	var showingDashboard = true;
 	$('.accordion-toggle').click(
-			function() {
+			function(evt) {
 				if (!$(this).hasClass("navBar")) { //when an item is clicked and is not top item
 					var goingActive = $(this);
 					var lastActive = $('#activeItem > .accordion-toggle');
@@ -229,6 +229,8 @@ if(request.getUserPrincipal() != null) {
 						$(".documentDisplay").css({
 							zIndex : "102"
 						});
+						evt.preventDefault();
+						connectToChatserver();
 
 						showingDashboard = false;
 						//clicking again should show the dashboard
@@ -330,13 +332,15 @@ if(request.getUserPrincipal() != null) {
 			wsocket.onmessage = onMessageReceived;
 			chatting = true;
 		} else {
-			wsocket.close();
+			leaveRoom();
 			chatting = false;
 		}
 	}
  
 	function leaveRoom() {
-		wsocket.close();
+		if (wsocket.readyState < 2) {
+			wsocket.close();
+		}
 	}
 
 	$(document).ready(function($) {
@@ -353,10 +357,6 @@ if(request.getUserPrincipal() != null) {
 		avatar = "<%=avatar%>";
 		$message = $('.chatInput');
 		$chatWindow = $('.chatsReceived');
-		$('.accordion-header').click(function(evt) {
-			evt.preventDefault();
-			connectToChatserver();
-		});
 		$('#user').click(function(){
 			leaveRoom();
 		});
