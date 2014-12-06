@@ -96,3 +96,9 @@ VALUES
 ('bglass', 'Glass', 'Becky', 'password', '/SASTeam08/images/chatAvatarBlue.png', 'user'),
 ('mcasey', 'Casey', 'Matt', 'password', '/SASTeam08/images/chatAvatarBlue.png', 'user'),
 ('rpepper', 'Pepper', 'Ralph', 'password', '/SASTeam08/images/chatAvatarBlue.png', 'user');
+
+
+INSERT INTO imageComments (docId, comment, usersName, xPos, yPos) VALUES
+( 1, 'wow this is an awesome tree!', 'Taylor Deckard', 38.46153846153846, 56.024096385542165),
+( 1, 'remove these sheep. thanks!', 'Taylor Deckard', 78.8981288981289, 61.295180722891565),
+( 1, 'sweet branches!', 'Taylor Deckard', 49.34782608695652, 27.2);
