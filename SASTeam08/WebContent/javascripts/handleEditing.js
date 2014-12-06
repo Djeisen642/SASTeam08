@@ -72,7 +72,6 @@ function upload_file(event) {
         contentType: false, // Set content type to false as jQuery will tell the server its a query string request
         success: function(data, textStatus, jqXHR)
         {
-        	console.log(data);
         	$(".uploadModal").animate({opacity:"0"}, 300, function(){
         		$(".uploadModal").css({display:"none"});
         		$('#fileToUpload').html("");
@@ -102,4 +101,90 @@ function downloadFile(href) {
 		var win = window.open(href, '_blank');
 		win.focus();
 	}
+}
+
+function runCommentEditor(docId) {
+	var x, y, xPrime, yPrime;
+	var clickedInput = false, submitted = false;
+	getImageComments(docId);
+	$('#imageComments').on('mousemove', function (event) {
+		x = 100 * event.pageX / $(document).width();
+		y = 100 * event.pageY / $(document).height();
+		var deltaX = 100 - x; 
+		var deltaY = 100 - y;
+		xPrime = (deltaX > 20) ? x + 2 : x - 10; 
+		yPrime = (deltaY > 20) ? y + 2 : y - 20;
+		//console.log(x + ", " + y);
+	});
+	var pointX = 0, pointY = 0;
+	$('#imageComments').on('click', function () {
+		if (!clickedInput) {
+			pointX = x; 
+			pointY = y; 
+			$(".commentInput").remove();
+			$("#imageComments > .circle").remove();
+			var circleDiv = "<div class=\"circle\" style=\"top:" + y + "%;left:"+ x + "%;\"></div>";
+			var commentInputDiv = "<div class=\"commentInput\" style=\"top:" + yPrime + "%;left:"+ xPrime + "%;\">" +
+			"<textarea class=\"form-control\" type=\"text\" id=\"commentInput\"/><button id=\"commentInputBtn\" class=\"btn btn-default\">Submit</button></div>"
+			$(circleDiv + commentInputDiv).appendTo("#imageComments");
+		}
+		$('#commentInput').unbind().on('click', function() {
+			clickedInput = true;
+		});
+		$('#commentInputBtn').unbind().on('click', function () {
+			sendCommentToDB($('#commentInput').val(), pointX, pointY, docId);
+			$(".commentInput").remove();
+			$("#imageComments > .circle").remove();
+			$('.commentInput').remove();
+			clickedInput = true; 
+			
+		});
+		clickedInput = false; 
+	});
+}
+
+function stopCommentEditor() {
+	$('#imageComments').off('mousemove');
+	$('#imageComments').off('click');
+	$('#commentInput').off('click');
+	$('#commentInputBtn').off('click');
+}
+
+function sendCommentToDB(comment, xpos, ypos, docId) {
+	
+	$.post("/SASTeam08/AddComment?id=" + docId + "&usersName=" + $("#userName").val(), {"comment": comment, "xPos" : xpos, "yPos" : ypos}, function(data) {
+		
+		console.log(data);
+		getImageComments(docId);
+	});
+}
+
+function getImageComments(docId) {
+	$("#imageCommentsDisplay").empty();
+	$.get("/SASTeam08/GetImageComments?docId=" + docId, function (data) {
+		for (var i = 0; i < data.length; i++) {
+			var yPrime, xPrime, thisI; 
+			var x = parseFloat(data[i].xPos);
+			var y = parseFloat(data[i].yPos);
+			var deltaX = 100 - x; 
+			var deltaY = 100 - y;
+			xPrime = (deltaX > 20) ? x + 2 : x - 10; 
+			yPrime = (deltaY > 20) ? y + 2 : y - 20;
+			var circle = "<div class=\"imageCommentCircle\"" +
+			"style=\"top:" + data[i].yPos + "%;left:" + data[i].xPos + "%;\""
+			+ "></div>";
+			var content = "<div class=\"imageCommentBox\""+
+			"style=\"top:" + yPrime + "%;left:" + xPrime + "%;\"" 
+			+"><p style=\"background-color:gray;color:white;padding:2px;border-radius:2px\">" + data[i].usersName + " said"
+			+ ":</p><p>" + data[i].comment +  "</p></div>"; 
+			content = circle + content; 
+			$("#imageCommentsDisplay").append(content);
+			thisI = i; 
+		}
+		$(".imageCommentCircle").hover(function () {
+			$(this).next().fadeIn(100);
+		}, function () {
+			$(this).next().fadeOut(100);
+		});
+	});
 }

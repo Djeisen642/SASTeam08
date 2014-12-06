@@ -37,4 +37,15 @@ CREATE TABLE chat (
 	senderAvatar		VARCHAR(500),
 	received			TIMESTAMP,
 	PRIMARY KEY (id)
+) ENGINE=innoDB; 
+
+CREATE TABLE imageComments (
+	id					SERIAL,
+	comment				VARCHAR(500),
+	usersName			VARCHAR(75),
+	xPos 				DOUBLE,
+	yPos				DOUBLE,
+	docId               BIGINT UNSIGNED,
+	PRIMARY KEY 		(id),
+	FOREIGN KEY 		(docId) REFERENCES docs(id) ON DELETE CASCADE
 ) ENGINE=innoDB;

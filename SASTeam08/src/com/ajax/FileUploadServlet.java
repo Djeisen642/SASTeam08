@@ -75,7 +75,7 @@ public class FileUploadServlet extends HttpServlet {
 				String ext = getExtension(filename);
 				filename = name +  (new Date()).getTime() + ext;
 				part.write(contextPath+ File.separator + "uploads" +File.separator+ filename);
-				System.out.println("here");
+				System.out.println(contextPath);
 				DocBean bean = new DocBean();
 				bean.setCampaignId(id);
 				bean.setCreator(creator);

@@ -19,6 +19,7 @@ if(request.getUserPrincipal() != null) {
 <html>
 <%@include file="/header.jsp"%>
 <body>
+	<input type="hidden" id="userName" value="<%= userName %>" />
 	<div class="header">
 		<!-- <button class="menu_btn"></button> -->
 		<button class="header_btn" id="group"></button>
@@ -108,9 +109,13 @@ if(request.getUserPrincipal() != null) {
 				<div class="chatBubble">This is a chat bubble</div>
 			</div>
 		</div>
-		<textarea class="chatInput"></textarea>
+		<textarea class="chatInput"></textarea>	
 	</div>
 
+	<div class="imageComments" id="imageComments">
+		<div class="imageCommentsDisplay" id="imageCommentsDisplay"></div>
+	</div>
+	<div class="viewImageCommentsBtn" id="viewImageCommentsBtn"><i class="glyphicon glyphicon-comment"></i></div>
 	<div class="imageModal" onclick="hideImageModal()">
 		<span class="imageModalImageHelper"></span> <img id="imageModalImage"
 			src="" />
@@ -386,11 +391,12 @@ if(request.getUserPrincipal() != null) {
 						if (i % 3 === 0) {
 							content = "<div class=\"documentRow\">"
 									+ "<div class=\"documentBox\" onclick=\"showImageModal('"
-									+ data[i].href
-									+ "')\">"
+									+ data[i].href + "', " + data[i].id
+									+ ")\">"
 									+ "<div class=\"documentImage\"></div>"
 									+ "<div class=\"deleteBtn\" id=\"" + data[i].id + "\"><i class=\"glyphicon glyphicon-trash\" /></div>"
 									+ "<input type=\"hidden\" class=\"docHref\" value=\""+ data[i].href +"\">"
+									+ "<input type=\"hidden\" class=\"docId\" value=\""+ data[i].id +"\">"
 									+ data[i].text
 									+ " - "
 									+ data[i].creator
@@ -398,11 +404,12 @@ if(request.getUserPrincipal() != null) {
 							$(content).appendTo($(".documentDisplayTable"));
 						} else {
 							content = "<div class=\"documentBox\" onclick=\"showImageModal('"
-									+ data[i].href
-									+ "')\">"
+									+ data[i].href + "', " + data[i].id
+									+ ")\">"
 									+ "<div class=\"documentImage\"></div>"
 									+ "<div class=\"deleteBtn\" id=\"" + data[i].id + "\"><i class=\"glyphicon glyphicon-trash\" /></div>"
 									+ "<input type=\"hidden\" class=\"docHref\" value=\""+ data[i].href +"\">"
+									+ "<input type=\"hidden\" class=\"docId\" value=\""+ data[i].id +"\">"
 									+ data[i].text
 									+ " - "
 									+ data[i].creator
@@ -483,9 +490,10 @@ if(request.getUserPrincipal() != null) {
 			});
 		});
 	}
-	function showImageModal(url) {
+	function showImageModal(url, docId) {
 		if (!clickedDelete) {
 			$('#imageModalImage').attr("src", url);
+			$('#viewImageCommentsBtn').css({'display': 'block'});
 			$('.imageModal').css({
 				display : "inline-block"
 			});
@@ -493,18 +501,43 @@ if(request.getUserPrincipal() != null) {
 				opacity : 1
 			}, 300);
 		}
-	}
-
-	function hideImageModal() {
-		$('.imageModal').animate({
-			opacity : 0
-		}, 300, function() {
-			$('.imageModal').css({
-				display : "none"
-			});
+		
+		$('#viewImageCommentsBtn').on('click', function () {
+			var bg = $('#viewImageCommentsBtn').css('backgroundColor');
+			if (bg === 'rgb(136, 136, 136)') {
+				clickedImageCommentsBtn = true; 
+				$('#viewImageCommentsBtn').css({'backgroundColor' : '#0000FF'});
+				$('#imageComments').css({'display' : 'block'});
+				runCommentEditor(docId);
+			} else {
+				hideComments();
+			}
 		});
-
 	}
+	var clickedImageCommentsBtn = false;
+	function hideImageModal() {
+		if (!clickedImageCommentsBtn) {
+			$('.imageModal').animate({
+				opacity : 0
+			}, 300, function() {
+				$('.imageModal').css({
+					display : "none"
+				});
+			});
+			$('#viewImageCommentsBtn').off('click');
+			$('#viewImageCommentsBtn').css({'display': 'none'});
+		}
+	}
+	
+	function hideComments() {
+		$('#viewImageCommentsBtn').css({'backgroundColor' : '#888888'});
+		$('#imageComments').css({'display' : 'none'});
+		$('.commentInput').remove();
+		$("#imageComments > .circle").remove();
+		clickedImageCommentsBtn = false; 
+		stopCommentEditor();
+	}
+	
 	var clickedDelete = false;
 	// Use the function below to add a scroll bar to a div
 	// 	$(function() {
