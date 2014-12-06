@@ -5,7 +5,7 @@
 <%@include file="/global.jsp" %>
 <%@include file="/header.jsp" %>
 <body>
-	<div class="header"></div>
+	<div class="loginHeader"></div>
 	<div class="splashLogo"></div>
 	<div class="loginForm">
 	<form method="post" action="/SASTeam08/authenticate.jsp">

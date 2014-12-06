@@ -28,7 +28,7 @@ if(request.getUserPrincipal() != null) {
 		<button class="header_btn" id="search"></button>
 	</div>
 	<!--<div class="navBar" id="campaign1">
-	<img class="back_arrow"  src="images/back_arrow.png"/>
+	<img class="back_arrow"  src="images/back_arrowBlack.png"/>
 	<div class="navBarText">2014 Christmas - Canned Food Drive</div>
 </div>-->
 
@@ -53,7 +53,7 @@ if(request.getUserPrincipal() != null) {
 	<div class="activeItem" id="activeItem">
 		<div class="accordion-toggle" id="<%=campaignList.get(0).getId()%>">
 			<div class="accordion-header">
-				<img class="back_arrow" src="/SASTeam08/images/back_arrow.png" />
+				<img class="back_arrow" src="/SASTeam08/images/back_arrowBlack.png" />
 				<%
 					String title = "";
 								   	  if (campaignList != null) {
@@ -71,7 +71,7 @@ if(request.getUserPrincipal() != null) {
 		%>
 		<div class="accordion-toggle" id="<%=campaignList.get(i).getId()%>">
 			<div class="accordion-header">
-				<img class="back_arrow" src="/SASTeam08/images/back_arrow.png" />
+				<img class="back_arrow" src="/SASTeam08/images/back_arrowBlack.png" />
 				<div><%=campaignList.get(i).getTitle()%></div>
 			</div>
 		</div>
@@ -166,7 +166,7 @@ if(request.getUserPrincipal() != null) {
 							300,
 							function() {
 								$('.accordion-toggle').not(goingActive).css({
-									backgroundColor : "#0D7D7B"
+									backgroundColor : "#12ada9"
 								}); //change all other bgs to dark green
 								$(goingActive).addClass("navBar", true);
 								$('#activeItem').css({
@@ -187,7 +187,7 @@ if(request.getUserPrincipal() != null) {
 								$('.accordion-toggle').not(goingActive)
 										.removeClass("navBar"); // remove navBar class from all other items
 								$(goingActive).animate({
-									backgroundColor : "#8cb755"
+									backgroundColor : "#C8D758"
 								}, 300); //change bg to light green
 								$(goingActive).css({
 									borderBottom : "0px"
@@ -265,6 +265,7 @@ if(request.getUserPrincipal() != null) {
 							zIndex : "10"
 						});
 						showingDashboard = true;
+						leaveRoom();
 					}
 				}
 			});
@@ -289,7 +290,6 @@ if(request.getUserPrincipal() != null) {
 	var serviceLocation = "ws:localhost:8080/SASTeam08/chat/";
 	var $message;
 	var $chatWindow;
-	var chatting;
 	var room = '';
 	var avatar;
 
@@ -326,15 +326,10 @@ if(request.getUserPrincipal() != null) {
 	}
  
 	function connectToChatserver() {
-		if (!chatting) {
-			room = "here";
+			room = $(".activeItem > .accordion-toggle").attr("id");
 			wsocket = new WebSocket(serviceLocation + room);
+			console.log(wsocket.readyState);
 			wsocket.onmessage = onMessageReceived;
-			chatting = true;
-		} else {
-			leaveRoom();
-			chatting = false;
-		}
 	}
  
 	function leaveRoom() {
@@ -346,7 +341,7 @@ if(request.getUserPrincipal() != null) {
 	$(document).ready(function($) {
 		$("#editor").hide();
 		$(".activeItem > .accordion-toggle").css({
-			backgroundColor : "#8cb755",
+			backgroundColor : "#C8D758",
 			borderBottom : 0
 		});
 		$(".activeItem > .accordion-toggle").addClass("navBar");
