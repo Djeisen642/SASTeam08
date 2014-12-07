@@ -221,7 +221,7 @@ if(request.getUserPrincipal() != null) {
 						$(".documentDisplay").animate({
 							left : "40px",
 							bottom : "5px",
-							right : "200px"
+							right : "220px"
 						}, 300);
 						$(".chatsReceived").empty();
 						$(".chat").animate({
@@ -360,6 +360,10 @@ if(request.getUserPrincipal() != null) {
 		$('#user').click(function(){
 			leaveRoom();
 		});
+		window.onbeforeunload = function() {
+		    websocket.onclose = function () {}; // disable onclose handler first
+		    leaveRoom();
+		};
 		/*$('#dock').find('.accordion-toggle').click(function(){
 			
 			    //Expand or collapse this panel
@@ -381,9 +385,10 @@ if(request.getUserPrincipal() != null) {
 				function() {
 					$.get("/SASTeam08/DBGetter?id=" + id, function(data) {
 							$(".documentDisplayTable").empty();
+							var numImages = $(".documentDisplay").width() / 300;
 					for (var i = 0; i < data.length; i++) {
 						var content;
-						if (i % 3 === 0) {
+						if (i % numImages === 0) {
 							content = "<div class=\"documentRow\">"
 									+ "<div class=\"documentBox\" onclick=\"showImageModal('"
 									+ data[i].href + "', " + data[i].id

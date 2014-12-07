@@ -30,7 +30,7 @@ INSERT INTO docs (
 	ext
 ) VALUES (
 	"../uploads/img1.png",
-	"A photo to test the database...",
+	"The Cover",
 	"Taylor Deckard",
 	1,
 	"png"
@@ -88,17 +88,16 @@ INSERT INTO users (username, lastName, firstName, password, avatar, role)
 VALUES
 ('tdeckard', 'Deckard', 'Taylor', 'password', '/SASTeam08/images/chatAvatarBlack.png', 'admin'),
 ('jsuttles', 'Suttles', 'Jason', 'password', '/SASTeam08/images/chatAvatarGreen.png', 'admin'),
-('ftort', 'Tort', 'Franklin', 'password', '/SASTeam08/images/chatAvatarYellow.png', 'user'),
-('jmontrazuma', 'Montrazuma', 'Joan', 'password', '/SASTeam08/images/chatAvatarOrange.png', 'user'),
-('bcooper', 'Cooper', 'Bradley', 'password', '/SASTeam08/images/chatAvatarRed.png', 'user'),
-('aenchaynes', 'Enchaynes', 'Alice', 'password', '/SASTeam08/images/chatAvatarPurple.png', 'user'),
-('cpeters', 'Peters', 'Cynthia', 'password', '/SASTeam08/images/chatAvatarBlue.png', 'user'),
-('bglass', 'Glass', 'Becky', 'password', '/SASTeam08/images/chatAvatarBlue.png', 'user'),
-('mcasey', 'Casey', 'Matt', 'password', '/SASTeam08/images/chatAvatarBlue.png', 'user'),
-('rpepper', 'Pepper', 'Ralph', 'password', '/SASTeam08/images/chatAvatarBlue.png', 'user');
+('ftort', 'Tort', 'Franklin', 'password', '/SASTeam08/images/chatAvatarYellow.png', 'admin'),
+('jmontrazuma', 'Montrazuma', 'Joan', 'password', '/SASTeam08/images/chatAvatarOrange.png', 'admin'),
+('bcooper', 'Cooper', 'Bradley', 'password', '/SASTeam08/images/chatAvatarRed.png', 'admin'),
+('aenchaynes', 'Enchaynes', 'Alice', 'password', '/SASTeam08/images/chatAvatarPurple.png', 'admin'),
+('cpeters', 'Peters', 'Cynthia', 'password', '/SASTeam08/images/chatAvatarBlue.png', 'admin'),
+('bglass', 'Glass', 'Becky', 'password', '/SASTeam08/images/chatAvatarBlue.png', 'admin'),
+('mcasey', 'Casey', 'Matt', 'password', '/SASTeam08/images/chatAvatarBlue.png', 'admin'),
+('rpepper', 'Pepper', 'Ralph', 'password', '/SASTeam08/images/chatAvatarBlue.png', 'admin');
 
 
 INSERT INTO imageComments (docId, comment, usersName, xPos, yPos) VALUES
 ( 1, 'wow this is an awesome tree!', 'Taylor Deckard', 38.46153846153846, 56.024096385542165),
-( 1, 'remove these sheep. thanks!', 'Taylor Deckard', 78.8981288981289, 61.295180722891565),
-( 1, 'sweet branches!', 'Taylor Deckard', 49.34782608695652, 27.2);
+( 1, 'Good job with these branches', 'Taylor Deckard', 49.34782608695652, 27.2);

@@ -44,20 +44,22 @@ public class DeleteFileServlet extends HttpServlet {
 		
 		//Get the absolute path from context
 		ServletContext ctx = getServletContext();
-		String contextPath = ctx.getRealPath(File.separator);
+		String contextPath = ctx.getRealPath("/");
 	
 		String new_href = href.replace("../", "");
-		File f = new File(contextPath + File.separator + new_href);
-		boolean deleted = f.delete();
+		File f = new File(contextPath + "/" + new_href);
+		if (f.exists()) {
+			boolean deleted = f.delete();
 		
 		
 		
-		PrintWriter out = new PrintWriter(response.getWriter());
-		if (deleted) {
-			action.deleteDoc(id);
-			out.write("File deleted!");
-		} else {
-			out.write("File deletion failed.");
+			PrintWriter out = new PrintWriter(response.getWriter());
+			if (deleted) {
+				action.deleteDoc(id);
+				out.write("File deleted!");
+			} else {
+				out.write("File deletion failed.");
+			}
 		}
 		
 		

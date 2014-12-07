@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.nio.file.FileSystem;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
@@ -62,7 +63,7 @@ public class FileUploadServlet extends HttpServlet {
 		String creator = request.getParameter("creator");
 		String text = request.getParameter("text");
 		ServletContext ctx = this.getServletContext();
-		String contextPath = ctx.getRealPath(File.separator);
+		String contextPath = ctx.getRealPath("/uploads/");
 		PrintWriter out = response.getWriter();
 		try {
 			Collection<Part> parts = request.getParts();
@@ -73,26 +74,27 @@ public class FileUploadServlet extends HttpServlet {
 				String filename = getFileName(part);
 				String name = getNameMinusExtension(filename);
 				String ext = getExtension(filename);
-				filename = name +  (new Date()).getTime() + ext;
-				part.write(contextPath+ File.separator + "uploads" +File.separator+ filename);
-				System.out.println(contextPath);
+				filename = name +  (new Date()).getTime() + "." + ext;
+				part.write(contextPath + "/" + filename);
+				System.out.println(contextPath + "/" + filename);
 				DocBean bean = new DocBean();
 				bean.setCampaignId(id);
 				bean.setCreator(creator);
 				bean.setText(text);
 				bean.setExt(ext);
-				bean.setHref("../uploads" + File.separator + filename);
+				bean.setHref("../uploads/" + filename);
 				action.insertDoc(bean);
+
+				System.out.println("...File uploaded");
+				response.setContentType("text/plain");
+			    response.setCharacterEncoding("UTF-8");
+				out.write("Success");
 			}
 		} catch (Exception e) {
 			out.write("Exception in uploading file.");
 			System.out.println(e.getMessage());
 		} 
 		
-		System.out.println("...File uploaded");
-		response.setContentType("text/plain");
-	    response.setCharacterEncoding("UTF-8");
-		out.write("Success");
 		out.close();
 	}
 	
